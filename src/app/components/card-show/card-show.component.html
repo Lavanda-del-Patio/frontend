@@ -1,0 +1,24 @@
+<mat-card [routerLink]="['/automation/shows', show.id]" class="mat-card-full-height">
+  <mat-card-header [matBadge]="show.torrents.length" [matBadgeHidden]="show.torrents.length<2">
+    <mat-card-title class="mat-card-title-override">
+      <div [matTooltip]="show.title" *ngIf="show.title; else torrentTitle">
+        {{show.title | titlecase | slice:0:23 }}
+      </div>
+      <ng-template #torrentTitle>
+        {{show.torrents[0].torrentTitle | titlecase | slice:0:23 }}
+      </ng-template>
+    </mat-card-title>
+  </mat-card-header>
+  <img mat-card-image [src]="imageConverted" alt="image">
+  <mat-card-content class="mat-card-content-override" fxLayout="row" fxLayoutAlign="space-around center">
+    <mat-icon matTooltip="Is on plex" *ngIf="show.onPlex" svgIcon="plextv"></mat-icon>
+    <mat-icon matTooltip="Is downloaded already" *ngIf="isDownloaded" color="accent">check_circle_outline</mat-icon>
+    <mat-icon matTooltip="Contains torrents on 4K" *ngIf="contains4K " color="accent">4k</mat-icon>
+    <mat-icon matTooltip="Contains torrents with HDR" *ngIf="containsHDR" color="accent">hdr_on</mat-icon>
+    <mat-icon matTooltip="Type film" *ngIf="isFilm" color="accent">movie</mat-icon>
+    <mat-icon matTooltip="Type show" *ngIf="isShow" color="accent">tv</mat-icon>
+    <span matTooltip="Added" class="text-with-background">
+      {{dateParsed}}
+    </span>
+  </mat-card-content>
+</mat-card>

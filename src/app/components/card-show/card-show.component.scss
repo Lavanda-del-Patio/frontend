@@ -1,0 +1,18 @@
+.mat-card-full-height {
+  margin: 12px;
+  :hover {
+    cursor: pointer;
+  }
+}
+.mat-card-title-override {
+  font-size: 14px !important;
+  color: #69f0ae;
+}
+
+.mat-card-content-override {
+}
+
+.text-with-background {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 0.25rem;
+}

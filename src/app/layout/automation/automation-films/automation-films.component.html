@@ -1,0 +1,11 @@
+<div @fadeSlideInOut>
+  <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around strech">
+    <div *ngFor="let film of data.content" fxFlex.xl="14%" fxFlex.lg="14%" fxFlex.md="25%" fxFlex.sm="45%"
+      fxFlex.xs="100%">
+      <app-card-film fxFlex [film]="film" (deleted)="deletedFilm($event)" (updated)="updatedFilm($event)"></app-card-film>
+    </div>
+  </div>
+</div>
+<mat-paginator [length]="data.totalElements" [pageSize]="data.size" [pageSizeOptions]="pageSizeOptions"
+  (page)="pageEvent = updatePageable($event)">
+</mat-paginator>

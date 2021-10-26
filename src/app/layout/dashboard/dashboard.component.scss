@@ -1,0 +1,19 @@
+.mat-divider {
+  width: 170px;
+  border-top-color: rgba($color: #d11515, $alpha: 1);
+  margin-left: 16px;
+  display: flex;
+  position: relative;
+}
+
+.mat-tab-group {
+  margin-bottom: 48px;
+}
+
+.content {
+  margin: 16px;
+}
+
+.content > mat-card {
+  margin-bottom: 16px;
+}

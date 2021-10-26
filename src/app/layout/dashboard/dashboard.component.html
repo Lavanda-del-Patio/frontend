@@ -1,0 +1,27 @@
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab *ngIf="lastFilms.length > 0" label="Automated Films">
+    <div class="content">
+      <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let film of lastFilms">
+          <app-card-film [film]="film"></app-card-film>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab *ngIf="lastShows.length > 0" label="Automated Shows">
+    <div class="content">
+      <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let show of lastShows">
+          <app-card-show [show]="show"></app-card-show>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Filebot">
+    <div class="content">
+      <filebot-table-app [pageSize]=6 [paginator]="false"></filebot-table-app>
+    </div>
+  </mat-tab>
+</mat-tab-group>

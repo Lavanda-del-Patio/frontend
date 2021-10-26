@@ -1,0 +1,14 @@
+<div *ngIf="feedFilm" class="background-cover" [style]="feedFilm.backdropImage===null ? undefined :{'--featured-image': 'url('+ feedFilm.backdropImage +')' }"
+  fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex fxLayoutGap="20px">
+  <div fxFlex fxFlex="30%" fxFlex.xs="100%">
+    <app-card-without-title [content]="feedFilm"> </app-card-without-title>
+  </div>
+  <div fxFlex fxFlex="70%" fxFlex.xs="100%" fxLayoutGap="30px">
+    <feed-metadata (reloadMetadataFeedFilm)="updateFeedFilm($event)" [feedFilm]="feedFilm"></feed-metadata>
+    <torrent-data [torrents]="feedFilm.torrents"></torrent-data>
+  </div>
+</div>
+<!-- <mat-icon color="accent">4k</mat-icon>
+<mat-icon color="accent">hdr_on</mat-icon>
+<mat-icon color="accent">movie</mat-icon>
+<mat-icon color="accent">tv</mat-icon> -->

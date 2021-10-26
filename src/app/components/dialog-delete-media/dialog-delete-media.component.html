@@ -1,0 +1,13 @@
+<div class="container">
+  <h3 mat-dialog-title>Are you sure?</h3>
+  <div mat-dialog-content>
+    <mat-form-field class="example-full-width">
+      <mat-label>Title</mat-label>
+      <input matInput disabled [(ngModel)]="data">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    <button mat-button color="warn" (click)="confirmDelete()">Delete</button>
+  </div>
+</div>

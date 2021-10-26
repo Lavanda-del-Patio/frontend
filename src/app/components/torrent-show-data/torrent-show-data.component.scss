@@ -1,0 +1,25 @@
+.torrent-data {
+  margin: 10px;
+}
+
+.text-with-background {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 0.25rem;
+  margin-right: 10px;
+}
+table {
+  width: 100%;
+}
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}

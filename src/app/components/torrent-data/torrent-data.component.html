@@ -1,0 +1,28 @@
+<div class="torrent-data">
+  <h3>Torrents</h3>
+  <mat-tab-group color="accent" [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+    <mat-tab *ngFor="let torrent of torrents; let index = index">
+      <ng-template mat-tab-label>
+        {{torrent.torrentQuality}} - {{torrent.torrentPage}}
+        <mat-icon *ngIf="torrent.assignToDownload" color="accent">check_circle_outline</mat-icon>
+      </ng-template>
+      <br>
+      <h4><strong>Torrent Url: </strong>{{torrent.torrentUrl}}</h4>
+      <h4><strong>Torrent Image: </strong>{{torrent.torrentImage}}</h4>
+      <h4><strong>Torrent Quality: </strong>{{torrent.torrentQuality}}</h4>
+      <h4 *ngIf="torrent.torrentSize"><strong>Torrent Size: </strong>{{torrent.torrentSize}}</h4>
+      <div fxLayout="row" fxLayoutAlign.xs="space-around center" fxLayoutAlign="none start" fxLayoutGap="10px">
+        <button color="accent" class="text-with-background" mat-button [disabled]="torrent.assignToDownload"
+          (click)="downloadTorrentFilm(torrent)">
+          <mat-icon>cloud_download</mat-icon>
+        </button>
+        <button (click)="openTorrentDialogInfo(torrent)" color="accent" class="text-with-background" mat-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="openDialogDelete(torrent)" color="warn" class="text-with-background" mat-button>
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
