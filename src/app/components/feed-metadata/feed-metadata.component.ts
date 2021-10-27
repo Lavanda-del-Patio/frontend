@@ -48,7 +48,7 @@ export class FeedMetadataComponent implements OnInit {
     ];
   }
   reloadFeedFilm(feedFilm: FeedFilm) {
-    this.reloadMetadataFeedFilm.emit(true)
+    this.reloadMetadataFeedFilm.emit(false)
   }
 
   reloadMetadata(feedFilm: FeedFilm) {

@@ -10,8 +10,9 @@ import { PageEvent } from '@angular/material/paginator';
 export class FeedFilmsService {
   constructor(private httpClient: HttpClient) { }
 
-  getFilm(id: string): Observable<FeedFilm> {
-    return this.httpClient.get<FeedFilm>(environment.apiUrl + 'feed-films/' + id);
+  getFilm(id: string, force?: boolean): Observable<FeedFilm> {
+    let params = new HttpParams().set('force', force);
+    return this.httpClient.get<FeedFilm>(environment.apiUrl + 'feed-films/' + id, { params: params });
   }
 
 
