@@ -39,7 +39,7 @@ export class AutomationFilmComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id')
-      this.getFilm();
+      this.getFilm(false);
     })
   }
 
@@ -47,8 +47,8 @@ export class AutomationFilmComponent implements OnInit {
     this.getFilm();
   }
 
-  getFilm() {
-    this.feedFilmsService.getFilm(this.id).subscribe(
+  getFilm(force?:boolean) {
+    this.feedFilmsService.getFilm(this.id,force).subscribe(
       (response) => {
         this.feedFilm = response
       },
@@ -72,8 +72,8 @@ export class AutomationFilmComponent implements OnInit {
     });
   }
 
-  updateFeedFilm(event: any) {
-    this.getFilm();
+  updateFeedFilm(event: boolean) {
+    this.getFilm(event);
   }
 
   deleteFilm(feedFilm: FeedFilm): void {

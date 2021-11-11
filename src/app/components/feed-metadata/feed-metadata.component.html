@@ -18,10 +18,10 @@
   <br>
 
   <div fxLayout="row" fxLayoutAlign.xs="space-around center" fxLayoutAlign="none start">
-    <button class="text-with-background" mat-button (click)="reloadFeedFilm(feedFilm)" color="accent">
+    <button class="text-with-background" mat-button (click)="reloadFeedFilm(feedFilm)" matTooltip="Reload film" color="accent">
       <mat-icon>autorenew</mat-icon>
     </button>
-    <button class="text-with-background" mat-button (click)="reloadMetadata(feedFilm)" color="accent">
+    <button class="text-with-background" mat-button (click)="reloadMetadata(feedFilm)"  matTooltip="Reload Metadata" color="accent">
       <mat-icon>refresh</mat-icon>
     </button>
     <button class="text-with-background" mat-button (click)="openMetadataDialogInfo(feedFilm)" color="accent">
