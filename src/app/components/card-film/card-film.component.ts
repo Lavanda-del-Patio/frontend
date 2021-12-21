@@ -74,7 +74,7 @@ export class CardFilmComponent implements OnInit {
   }
 
   private torrentIsDownloaded(): boolean {
-    return this.film.torrents.some(torrent => torrent.downloaded && torrent.assignToDownload);
+    return this.film.torrents.some(torrent => torrent.downloaded);
   }
 
   private torrentsContains4K(): boolean {
@@ -82,7 +82,7 @@ export class CardFilmComponent implements OnInit {
   }
 
   private torrentContainsHDR(): boolean {
-    return this.film.torrents.some(torrent => torrent.torrentUrl.includes('HDR'));
+    return this.film.torrents.some(torrent => torrent.torrentQuality.includes('HDR'));
   }
 
   private getAddedDate(): string {

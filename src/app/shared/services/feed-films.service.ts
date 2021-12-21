@@ -46,4 +46,8 @@ export class FeedFilmsService {
     return this.httpClient.get<FeedFilm[]>(environment.apiUrl + 'feed-films/search', { params: params });
   }
 
+  downloadTorrent(id: string): Observable<void> {
+    return this.httpClient.post<void>(environment.apiUrl + 'feed-films/torrents/' + id+'?forceDownload=true', null);
+  }
+
 }

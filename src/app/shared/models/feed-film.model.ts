@@ -27,7 +27,7 @@ export interface Torrent {
   torrentYear: number;
   torrentPage: TorrentPage;
   downloaded: boolean;
-  assignToDownload: boolean;
+  torrentValidate:boolean;
 }
 export enum TorrentPage {
   DON_TORRENT,
