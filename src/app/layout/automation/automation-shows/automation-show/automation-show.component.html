@@ -5,7 +5,7 @@
     <app-card-without-title [content]="feedShow"> </app-card-without-title>
   </div>
   <div fxFlex fxFlex="70%" fxFlex.xs="100%" fxLayoutGap="30px">
-    <feed-metadata (reloadMetadataFeedFilm)="updateFeedFilm($event)" [feedFilm]="feedShow"></feed-metadata>
+    <!-- <feed-metadata (reloadMetadataFeedFilm)="updateFeedFilm($event)" [feedFilm]="feedShow"></feed-metadata> -->
     <torrent-show-data [torrents]="feedShow.torrents"></torrent-show-data>
   </div>
 </div>

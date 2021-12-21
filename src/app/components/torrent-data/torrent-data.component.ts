@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FeedFilmsService } from './../../shared/services/feed-films.service';
 import { FeedMetadataDialogComponent } from './../feed-metadata-dialog/feed-metadata-dialog.component';
 import { FeedFilm, Type, TorrentPage, Torrent } from '../../shared/models/feed-film.model';
-import { Inject, Component, OnInit, Input } from '@angular/core';
+import { Inject, Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 
@@ -23,7 +23,8 @@ export interface TorrentPageContent {
 @Component({
   selector: 'torrent-data',
   templateUrl: './torrent-data.component.html',
-  styleUrls: ['./torrent-data.component.scss']
+  styleUrls: ['./torrent-data.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class TorrentDataComponent implements OnInit {
@@ -69,9 +70,12 @@ export class TorrentDataComponent implements OnInit {
     //TODO FIX THIS
   }
   downloadTorrentFilm(torrent: Torrent): void {
-    torrent.assignToDownload = true;
-    this.updateTorrent(torrent);
+    this.feedFilmsService.downloadTorrent(torrent.torrentId).subscribe(
+      (downloaded) => torrent.downloaded = true,
+      (error) => { console.log("Error downloading torrent") }
+    )
   }
+  
   openTorrentDialogInfo(torrent: Torrent): void {
     const dialogRef = this.dialog.open(FeedTorrentDialogComponent, {
       width: '450px',
