@@ -15,18 +15,22 @@
         <mat-icon class="margin-right">collections</mat-icon>
         <span class="title" md-line>Plex</span>
       </a> -->
-      <a mat-list-item [matMenuTriggerFor]="menu">
+      <!-- <a mat-list-item [matMenuTriggerFor]="menu">
         <mat-icon class="margin-right">autorenew</mat-icon>
         <span class="title" md-line>Automation</span>
-      </a>
+      </a> -->
       <a mat-list-item routerLink="/filebot">
         <mat-icon class="margin-right">attachment</mat-icon>
         <span class="title" md-line>Filebot</span>
       </a>
-      <a mat-list-item routerLink="/elastictranscoder">
+      <a mat-list-item routerLink="/filebot-executor">
+        <mat-icon class="margin-right">attachment</mat-icon>
+        <span class="title" md-line>Filebot Executor</span>
+      </a>
+      <!-- <a mat-list-item routerLink="/elastictranscoder">
         <mat-icon class="margin-right">device_hub</mat-icon>
         <span class="title" md-line>Elastictranscoder</span>
-      </a>
+      </a> -->
       <mat-menu #menu="matMenu" xPosition="before" yPosition="above">
         <button routerLink="/automation/shows" mat-menu-item>
           <mat-icon>tv</mat-icon>
