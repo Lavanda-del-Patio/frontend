@@ -6,7 +6,7 @@
   <span routerLink="/dashboard" fxShow="true" fxHide.lt-sm="true">Dashboard</span>
 
   <!-- <span routerLink="/plex" fxShow="true" fxHide.lt-sm="true">Plex</span> -->
-  <span [matMenuTriggerFor]="menu" fxShow="true" fxHide.lt-sm="true">Automation</span>
+  <!-- <span [matMenuTriggerFor]="menu" fxShow="true" fxHide.lt-sm="true">Automation</span>
   <mat-menu #menu="matMenu">
     <button routerLink="/automation/shows" mat-menu-item>
       <mat-icon>tv</mat-icon>
@@ -16,11 +16,13 @@
       <mat-icon>local_movies</mat-icon>
       <span>Films</span>
     </button>
-  </mat-menu>
+  </mat-menu> -->
   <span routerLink="/filebot" fxShow="true" fxHide.lt-sm="true">Filebot</span>
-  <span routerLink="/elastictranscoder" fxShow="true" fxHide.lt-sm="true">Elastictranscoder</span>
+  <span routerLink="/filebot-executor" fxShow="true" fxHide.lt-sm="true">Filebot Executor</span>
+
+  <!-- <span routerLink="/elastictranscoder" fxShow="true" fxHide.lt-sm="true">Elastictranscoder</span> -->
   <span class="example-spacer"></span>
-  <mat-form-field fxShow="true" fxHide.lt-sm="true" style="width: 20rem" floatLabel="never">
+  <!-- <mat-form-field fxShow="true" fxHide.lt-sm="true" style="width: 20rem" floatLabel="never">
     <input matInput [matAutocomplete]="auto" #searchInput="matInput" (input)="onInput(searchInput.value)" type="text"
       placeholder="Search on Automation" autocomplete="off" />
     <mat-icon [color]="searchInput.focused ? 'accent' : ''" matSuffix>search</mat-icon>
@@ -31,7 +33,7 @@
         <small>{{state.releaseDate | date:'yyyy' }}</small>
       </mat-option>
     </mat-autocomplete>
-  </mat-form-field>
+  </mat-form-field> -->
   <span *ngIf="isAuthenticated" [matMenuTriggerFor]="menulogout" fxShow="true" fxHide.lt-md="true"
     class="span-user">{{userName}}</span>
   <span *ngIf="!isAuthenticated" fxShow="true" fxHide.lt-md="true" class="span-user">{{userName}}</span>

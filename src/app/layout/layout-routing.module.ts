@@ -33,6 +33,13 @@ const routes: Routes = [
         ]
     },
     {
+        path: 'filebot-executor',
+        component: LayoutComponent,
+        children: [
+            { path: '', loadChildren: () => import('./filebot-executor/filebot-executor.module').then(m => m.FilebotExecutorModule) },
+        ]
+    },
+    {
         path: 'elastictranscoder',
         component: LayoutComponent,
         children: [
