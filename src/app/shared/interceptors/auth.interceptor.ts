@@ -15,8 +15,8 @@ export class AuthInterceptor implements HttpInterceptor {
       request = request.clone({
         withCredentials: true
       });
-      console.log ("WIH")
-      console.log (request)
+      // console.log ("WIH")
+      // console.log (request)
 
       return next.handle(request);
     }
