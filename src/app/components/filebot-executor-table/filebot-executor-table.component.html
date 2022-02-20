@@ -141,15 +141,13 @@
         </div> -->
         <mat-list>
           <mat-list-item *ngFor="let item of element.filesName; let i = index">
-            {{ item }}
-            <mat-icon>arrow_right_alt</mat-icon>
-            {{ element.newFilesName[i] }}
+            <ng-container *ngIf="element.status == 'PROCESSED'">
+              {{ element.filesName[i] }} <mat-icon>arrow_right_alt</mat-icon>
+              {{ element.newFilesName[i] }}
+            </ng-container>
           </mat-list-item>
         </mat-list>
-        <!-- <div class="example-element-description">
-          {{element.status}}
-          <span class="example-element-description-attribution"> -- Wikipedia </span>
-        </div> -->
+
       </div>
     </td>
   </ng-container>
