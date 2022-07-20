@@ -1,0 +1,30 @@
+<mat-card class="mat-card-full-height">
+  <mat-card-header [matBadge]="" [matBadgeHidden]="false">
+    <mat-card-title class="mat-card-title-override">
+      <div [matTooltip]="">
+        <!-- {{film.title | titlecase | slice:0:23 }} -->
+        {{filebotExecutor.path}} <mat-icon>arrow_forward</mat-icon> {{filebotExecutor.newPath}}
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <!-- <img mat-card-image [src]="imageConverted" alt="image"> -->
+  <mat-card-content class="mat-card-content-override">
+    <!-- <mat-icon matTooltip="Is on plex" svgIcon="plextv"></mat-icon> -->
+    <!-- <mat-icon matTooltip="Is downloaded already" color="accent">check_circle_outline</mat-icon>
+    <mat-icon matTooltip="Contains torrents on 4K" color="accent">4k</mat-icon>
+    <mat-icon matTooltip="Contains torrents with HDR" color="accent">hdr_on</mat-icon>
+    <mat-icon matTooltip="Type film" color="accent">movie</mat-icon>
+    <mat-icon matTooltip="Type show" color="accent">tv</mat-icon> -->
+    <div *ngFor="let fileName of filebotExecutor.files; let i = index">
+      <span>{{fileName}} --> {{filebotExecutor.newFiles[i]}}</span>
+    </div>
+    <br>
+    <button mat-icon-button aria-label="Delete File">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Delete File">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <span style="color: red">Status: {{filebotExecutor.status}} </span>
+  </mat-card-content>
+</mat-card>

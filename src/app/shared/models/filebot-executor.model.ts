@@ -1,13 +1,14 @@
 export interface FilebotExecutor {
     id: string;
-    filesName?: string[];
-    newFilesName: string[];
-    folderPath: string;
-    parentFolderPath: string
-    newParentFolderPath: string;
-    command: string;
-    expireAfterFourteenDays: string;
-    status: FilebotExecutorStatus;
+    files?: string[];
+    newFiles?: string[];
+    path?: string;
+    newPath?: string
+    category?: string;
+    command?: string;
+    englisth?: boolean;
+    expireAfterFourteenDays?: string;
+    status?: FilebotExecutorStatus;
 }
 
 export enum FilebotExecutorStatus {
