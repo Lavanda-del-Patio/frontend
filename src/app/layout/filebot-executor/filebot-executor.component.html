@@ -3,12 +3,15 @@
 </div> -->
 
 
-<div >
-  <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around strech">
-    <div *ngFor="let item of data.filebots" fxFlex.xl="14%" fxFlex.lg="14%" fxFlex.md="25%" fxFlex.sm="45%"
-      fxFlex.xs="100%">
-      <filebot-executor-app [filebotExecutor]="item"></filebot-executor-app>
-      <!-- <app-card-film fxFlex [film]="film" (deleted)="deletedFilm($event)" (updated)="updatedFilm($event)"></app-card-film> -->
-    </div>
+<div>
+  <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around strech" *ngIf="data.filebots.length >1">
+    <!-- <div *ngFor="let item of data.filebots" fxFlex.xl="14%" fxFlex.lg="14%" fxFlex.md="25%" fxFlex.sm="45%"
+      fxFlex.xs="100%"> -->
+    <!-- <filebot-executor-app [filebotExecutor]="item"></filebot-executor-app> -->
+    <filebot-executor-table-app (pageEventToParent)="pageEvent($event)" [pageSize]=20 [paginator]="true" [totalElements]="resultsLength"
+      [filebotExecutors]="data.filebots"></filebot-executor-table-app>
+
+    <!-- <app-card-film fxFlex [film]="item" (deleted)="deletedFilm($event)" (updated)="updatedFilm($event)"></app-card-film> -->
+    <!-- </div> -->
   </div>
 </div>
