@@ -26,6 +26,7 @@ import { CardFilmWithoutTitleComponent } from '../components/card-film-without-t
 import { TorrentDataComponent } from '../components/torrent-data/torrent-data.component';
 import { FilebotTableComponent } from '../components/filebot-table/filebot-table.component';
 import { FilebotExecutorComponent } from '../components/filebot-executor/filebot-executor.component';
+import { FilebotExecutorTableComponent } from '../components/filebot-executor-table/filebot-executor-table.component';
 
 import { CardWithoutTitleComponent } from '../components/card-without-title/card-without-title.component';
 import { TorrentShowDataComponent } from '../components/torrent-show-data/torrent-show-data.component';
@@ -63,7 +64,8 @@ import { TorrentShowChapterDataComponent } from '../components/torrent-show-chap
     TranscodeMediaTableComponent,
     TranscodeMediaComponent,
     FilebotTableComponent,
-    FilebotExecutorComponent
+    FilebotExecutorComponent,
+    FilebotExecutorTableComponent
   ],
   exports: [
     FlatMediaTableComponent,
@@ -81,7 +83,8 @@ import { TorrentShowChapterDataComponent } from '../components/torrent-show-chap
     TorrentShowDataComponent,
     TorrentShowChapterDataComponent,
     FilebotTableComponent,
-    FilebotExecutorComponent
+    FilebotExecutorComponent,
+    FilebotExecutorTableComponent
   ]
 })
 export class LayoutModule { }

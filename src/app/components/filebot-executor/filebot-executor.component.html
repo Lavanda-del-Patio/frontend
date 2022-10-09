@@ -19,11 +19,11 @@
       <span>{{fileName}} --> {{filebotExecutor.newFiles[i]}}</span>
     </div>
     <br>
-    <button mat-icon-button aria-label="Delete File">
+    <button mat-icon-button aria-label="Delete File" (click)="delete()" matTooltip="Delete of this execution">
       <mat-icon>delete</mat-icon>
     </button>
-    <button mat-icon-button aria-label="Delete File">
-      <mat-icon>edit</mat-icon>
+    <button mat-icon-button aria-label="Re-execute File" (click)="reExecute()" matTooltip="Re-execution of this path">
+      <mat-icon>replay</mat-icon>
     </button>
     <span style="color: red">Status: {{filebotExecutor.status}} </span>
   </mat-card-content>

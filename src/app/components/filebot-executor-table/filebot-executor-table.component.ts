@@ -6,7 +6,7 @@ import {
   TorrentPage,
   Torrent,
 } from '../../shared/models/feed-film.model';
-import { Inject, Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Inject, Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
@@ -24,6 +24,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { PageEvent } from '@angular/material/paginator';
 
 export interface TypeContent {
   key: Type;
@@ -55,9 +56,9 @@ export interface TorrentPageContent {
   value: string;
 }
 @Component({
-  selector: 'filebot-executor-app',
-  templateUrl: './filebot-executor.component.html',
-  styleUrls: ['./filebot-executor.component.scss'],
+  selector: 'filebot-executor-table-app',
+  templateUrl: './filebot-executor-table.component.html',
+  styleUrls: ['./filebot-executor-table.component.scss'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
@@ -69,35 +70,51 @@ export interface TorrentPageContent {
     ]),
   ],
 })
-export class FilebotExecutorComponent implements OnInit {
-  @Input() filebotExecutor: FilebotExecutor;
+export class FilebotExecutorTableComponent implements OnInit {
+  dataSource = undefined;
+  displayedColumns: string[] = ['path', 'newPath', 'fileName', 'newFileName','status', 'delete', 'reExecute'];
+
+  @Input() filebotExecutors: FilebotExecutor[];
+  @Input() pageSize: number;
+  @Input() paginator: boolean;
+  @Input() totalElements: number;
+  @Output() pageEventToParent: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
 
   constructor(
     private filebotExecutorService: FilebotExecutorService,
     private snackBar: MatSnackBar) {
+    this.dataSource = this.filebotExecutors;
+    console.log(this.dataSource)
 
   }
 
   ngOnInit(): void {
+    console.log(this.filebotExecutors)
+    this.dataSource = this.filebotExecutors;
+    console.log(this.dataSource)
     // throw new Error('Method not implemented.');
   }
 
+  pageEvents(event: any) {
+    console.log()
+    this.pageEventToParent.emit(event);
 
-  reExecute() {
+  }
+
+  reExecute(filebotExecutor: FilebotExecutor) {
     this.filebotExecutorService
-      .reExecute(this.filebotExecutor.id)
+      .reExecute(filebotExecutor.id)
       .subscribe(
         (data) => {
           this.snackBar.open('Re-executed', '', {
             duration: 2000,
           });
-          this.filebotExecutor = data;
+          filebotExecutor = data;
         }
       );
   }
 
   delete() {
-    console.log("Click deleted")
 
   }
 }

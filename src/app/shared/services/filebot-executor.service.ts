@@ -5,14 +5,23 @@ import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FilebotExecutor } from '../models/filebot-executor.model';
 
 @Injectable({ providedIn: 'root' })
 export class FilebotExecutorService {
-    constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
 
-    getAllByPageable(page: number, pageSize: number): Observable<Pageable> {
-        return this.httpClient.get<Pageable>(environment.apiUrl + 'filebot-executor?page=' + page + '&size=' + pageSize);
-    }
+  getAllByPageable(page: number, pageSize: number): Observable<Pageable> {
+    return this.httpClient.get<Pageable>(environment.apiUrl + 'filebot-executor?page=' + page + '&size=' + pageSize);
+  }
+
+  reExecute(id: string): Observable<any> {
+    return this.httpClient.put(environment.apiUrl + 'filebot-executor/' + id, null);
+  }
+
+  delete(id: string): Observable<any> {
+    return this.httpClient.delete(environment.apiUrl + 'filebot-executor/' + id);
+  }
 
 }

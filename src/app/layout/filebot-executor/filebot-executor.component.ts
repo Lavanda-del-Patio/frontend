@@ -39,13 +39,13 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./filebot-executor.component.scss']
 })
 export class FilebotExecutorComponent implements AfterViewInit {
-  displayedColumns: string[] = ['filesName', 'newFilesName', 'status','actions'];
+  displayedColumns: string[] = ['filesName', 'newFilesName', 'status', 'actions'];
   dataSource = [...ELEMENT_DATA];
   expandedElement: FilebotExecutor | null;
 
 
- pageSize: number;
- paginator: boolean;
+  pageSize: number = 20;
+  paginator: boolean;
 
   resultsLength = 0;
   data: PageableData = {
@@ -56,7 +56,7 @@ export class FilebotExecutorComponent implements AfterViewInit {
   constructor(
     private filebotExecutorService: FilebotExecutorService,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngAfterViewInit() {
 
@@ -64,6 +64,30 @@ export class FilebotExecutorComponent implements AfterViewInit {
     this.filebotExecutorService.getAllByPageable(0, this.pageSize).subscribe(
       (nextNews) => {
         const contentData = nextNews.content;
+        contentData.forEach(element => {
+          element.path = element.path.substring(element.path.lastIndexOf('/') + 1);
+          console.log(element.path);
+        });
+        this.data.filebots = contentData;
+        this.data.loading = false;
+        this.resultsLength = nextNews.totalElements;
+      },
+      (error) =>
+        this.snackBar.open('No data to display', undefined, { duration: 4000 })
+    );
+  }
+  pageEvent(event) {
+    console.log("EEVVNTTO")
+    if (this.data.loading) { return; }
+
+    this.data.loading = true;
+    this.filebotExecutorService.getAllByPageable(event.pageIndex, this.pageSize).subscribe(
+      (nextNews) => {
+        const contentData = nextNews.content;
+        contentData.forEach(element => {
+          element.path = element.path.substring(element.path.lastIndexOf('/') + 1);
+          console.log(element.path);
+        });
         this.data.filebots = contentData;
         this.data.loading = false;
         this.resultsLength = nextNews.totalElements;
