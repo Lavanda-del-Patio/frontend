@@ -17,7 +17,7 @@ export class FilebotExecutorService {
   }
 
   reExecute(id: string): Observable<any> {
-    return this.httpClient.put(environment.apiUrl + 'filebot-executor/' + id, null);
+    return this.httpClient.put(environment.apiUrl + 'filebot-executor/' + id, {});
   }
 
   delete(id: string): Observable<any> {
