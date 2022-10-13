@@ -1,4 +1,4 @@
-<div *ngIf="data.filebots.length > 0">
+<div *ngIf="data.filebots.length > 0;else noContent">
   <div class="example-container mat-elevation-z8">
     <div class="example-table-container">
       <table mat-table *ngIf="data.filebots.length > 0" [dataSource]="data.filebots">
@@ -27,3 +27,8 @@
     [pageSize]="pageSize">
   </mat-paginator>
 </div>
+<ng-template #noContent>
+  <div class="center">
+    <p>No Content</p>
+  </div>
+</ng-template>
