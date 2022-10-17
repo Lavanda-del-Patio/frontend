@@ -32,11 +32,11 @@ export class DialogEditFilebotExecutorComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data)
-    this.prepareFormControls();
     this.filebotExecutorService.getAllFilebotExecutor().pipe(take(1)).subscribe(
       (files) => {
         this.allFiles = files;
         this.loading = false;
+        this.prepareFormControls();
       }
     );
   }
@@ -61,7 +61,7 @@ export class DialogEditFilebotExecutorComponent implements OnInit {
       category: this.qbittorrentFormGroup.get('category')?.value,
       command: this.qbittorrentFormGroup.get('command')?.value,
     }
-    this.filebotExecutorService.editFilebotExecutor(this.data.id, filebotExecutor,true).pipe(take(1)).subscribe((res) => {
+    this.filebotExecutorService.editFilebotExecutor(this.data.id, filebotExecutor, true).pipe(take(1)).subscribe((res) => {
       this.openSnackBar('Edited');
       this.dialogRef.close();
     }
