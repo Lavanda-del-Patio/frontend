@@ -35,8 +35,8 @@ export class DialogEditFilebotExecutorComponent implements OnInit {
     this.filebotExecutorService.getAllFilebotExecutor().pipe(take(1)).subscribe(
       (files) => {
         this.allFiles = files;
-        this.loading = false;
         this.prepareFormControls();
+        this.loading = false;
       }
     );
   }
