@@ -30,10 +30,10 @@ export class DialogAddQbittorrentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.prepareFormControls();
     this.filebotExecutorService.getAllFilebotExecutor().pipe(take(1)).subscribe(
       (files) => {
         this.allFiles = files;
+        this.prepareFormControls();
         this.loading = false;
       }
     );
