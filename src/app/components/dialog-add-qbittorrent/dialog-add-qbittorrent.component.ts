@@ -40,8 +40,8 @@ export class DialogAddQbittorrentComponent implements OnInit {
   }
   prepareFormControls() {
     this.qbittorrentFormGroup = this.formBuilder.group({
-      file: [null, Validators.required],
-      category: [null, Validators.required]
+      file: ["", Validators.required],
+      category: ["", Validators.required]
     });
 
   }

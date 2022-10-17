@@ -3,7 +3,7 @@
   <div class="spinner-container" *ngIf="loading">
     <mat-spinner></mat-spinner>
   </div>
-  <ng-container>
+  <ng-container *ngIf="!loading">
     <form class="mat-dialog-content" (ngSubmit)="onSubmit()" [formGroup]="qbittorrentFormGroup">
       <div class="form">
         <mat-form-field appearance="fill">
