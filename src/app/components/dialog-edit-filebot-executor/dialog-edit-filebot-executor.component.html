@@ -30,13 +30,13 @@
           </mat-error>
         </mat-form-field>
       </div>
+      <p>
+        <mat-checkbox formControlName="redoCommand" (click)="changeRedoCommand()">Redo command?</mat-checkbox>
+      </p>
       <div class="form">
         <mat-form-field appearance="fill">
           <mat-label>Command</mat-label>
-          <textarea formControlName="command" required matInput></textarea>
-          <mat-error *ngIf="qbittorrentFormGroup.hasError('required')">
-            This field is required
-          </mat-error>
+          <textarea formControlName="command" matInput></textarea>
         </mat-form-field>
       </div>
       <!-- <div class="form">

@@ -22,6 +22,8 @@ export class DialogEditFilebotExecutorComponent implements OnInit {
   englishValues = ['true', 'false'];
   qbittorrentFormGroup!: FormGroup;
 
+  redoCommand: boolean = true
+
   constructor(public dialogRef: MatDialogRef<DialogEditFilebotExecutorComponent>,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -44,10 +46,25 @@ export class DialogEditFilebotExecutorComponent implements OnInit {
     this.qbittorrentFormGroup = this.formBuilder.group({
       file: [this.data.path, Validators.required],
       category: [this.data.category, Validators.required],
-      command: [this.data.command, Validators.required],
+      command: [{ value: this.data.command, disabled: true}, Validators.required],
+      redoCommand: this.redoCommand
       // english: [this.data.english, Validators.required],
     });
 
+  }
+
+
+  changeRedoCommand() {
+    console.log("CHANGING: " + this.redoCommand)
+    this.redoCommand = !this.redoCommand;
+    console.log("CHANGED: " + this.redoCommand)
+
+    if (this.redoCommand) {
+      this.qbittorrentFormGroup.get('command')?.disable();
+    }
+    else {
+      this.qbittorrentFormGroup.get('command')?.enable();
+    }
   }
 
   cancel() {
@@ -60,6 +77,9 @@ export class DialogEditFilebotExecutorComponent implements OnInit {
       path: this.qbittorrentFormGroup.get('file')?.value,
       category: this.qbittorrentFormGroup.get('category')?.value,
       command: this.qbittorrentFormGroup.get('command')?.value,
+    }
+    if (this.redoCommand) {
+      filebotExecutor.command = null;
     }
     this.filebotExecutorService.editFilebotExecutor(this.data.id, filebotExecutor, true).pipe(take(1)).subscribe((res) => {
       this.openSnackBar('Edited');
