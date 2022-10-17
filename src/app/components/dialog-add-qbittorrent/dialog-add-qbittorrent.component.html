@@ -1,0 +1,38 @@
+<div class="container">
+  <h3 mat-dialog-title>Add Qbittorrent</h3>
+  <div class="spinner-container" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+  <ng-container>
+    <form class="mat-dialog-content" (ngSubmit)="onSubmit()" [formGroup]="qbittorrentFormGroup">
+      <div class="form">
+        <mat-form-field appearance="fill">
+          <mat-label>File or Path</mat-label>
+          <mat-select formControlName="file" required>
+            <mat-option *ngFor="let file of allFiles" [value]="file">{{file}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="qbittorrentFormGroup.hasError('required')">
+            This field is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form">
+        <mat-form-field appearance="fill">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="category" required>
+            <mat-option *ngFor="let category of categorys" [value]="category">{{category}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="qbittorrentFormGroup.hasError('required')">
+            This field is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div mat-dialog-actions>
+        <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel</button>
+        <button mat-raised-button [disabled]="!qbittorrentFormGroup.valid" type="submit">Accept</button>
+      </div>
+    </form>
+  </ng-container>
+</div>

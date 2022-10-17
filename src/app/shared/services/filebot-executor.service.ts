@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FilebotExecutor } from '../models/filebot-executor.model';
+import { Qbittorrent } from '../models/qbittorrent.model';
 
 @Injectable({ providedIn: 'root' })
 export class FilebotExecutorService {
@@ -16,12 +17,19 @@ export class FilebotExecutorService {
     return this.httpClient.get<Pageable>(environment.apiUrl + 'filebot-executor?page=' + page + '&size=' + pageSize);
   }
 
-  reExecute(id: string): Observable<any> {
-    return this.httpClient.put(environment.apiUrl + 'filebot-executor/' + id, {});
-  }
 
+  editFilebotExecutor(id: string, filebotExecutor: FilebotExecutor, force: boolean): Observable<FilebotExecutor> {
+    return this.httpClient.put<FilebotExecutor>(environment.apiUrl + 'filebot-executor/' + id + '?force=' + force, filebotExecutor);
+  }
   delete(id: string): Observable<any> {
     return this.httpClient.delete(environment.apiUrl + 'filebot-executor/' + id);
   }
 
+  getAllFilebotExecutor(): Observable<string[]> {
+    return this.httpClient.get<string[]>(environment.apiUrl + 'filebot-executor/files');
+  }
+
+  createQbittorrent(qbittorrent: Qbittorrent): Observable<Qbittorrent> {
+    return this.httpClient.post<Qbittorrent>(environment.apiUrl + 'filebot-executor', qbittorrent);
+  }
 }
