@@ -31,6 +31,8 @@ import { FilebotExecutorTableComponent } from '../components/filebot-executor-ta
 import { CardWithoutTitleComponent } from '../components/card-without-title/card-without-title.component';
 import { TorrentShowDataComponent } from '../components/torrent-show-data/torrent-show-data.component';
 import { TorrentShowChapterDataComponent } from '../components/torrent-show-chapter-data/torrent-show-chapter-data.component';
+import { DialogAddQbittorrentComponent } from '../components/dialog-add-qbittorrent/dialog-add-qbittorrent.component';
+import { DialogEditFilebotExecutorComponent } from '../components/dialog-edit-filebot-executor/dialog-edit-filebot-executor.component';
 
 @NgModule({
   imports: [
@@ -58,6 +60,8 @@ import { TorrentShowChapterDataComponent } from '../components/torrent-show-chap
     DialogAddTranscodesComponent,
     DialogDeleteMediaComponent,
     DialogUploadMediaComponent,
+    DialogAddQbittorrentComponent,
+    DialogEditFilebotExecutorComponent,
     FeedTorrentDialogComponent,
     FeedMetadataDialogComponent,
     TranscoderStatusComponent,
@@ -74,6 +78,8 @@ import { TorrentShowChapterDataComponent } from '../components/torrent-show-chap
     DialogAddTranscodesComponent,
     DialogDeleteMediaComponent,
     DialogUploadMediaComponent,
+    DialogAddQbittorrentComponent,
+    DialogEditFilebotExecutorComponent,
     TranscoderStatusComponent,
     CardFilmComponent,
     CardFilmWithoutTitleComponent,

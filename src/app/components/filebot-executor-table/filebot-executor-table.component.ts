@@ -25,6 +25,9 @@ import {
   trigger,
 } from '@angular/animations';
 import { PageEvent } from '@angular/material/paginator';
+import { Qbittorrent } from 'src/app/shared/models/qbittorrent.model';
+import { DialogAddQbittorrentComponent } from '../dialog-add-qbittorrent/dialog-add-qbittorrent.component';
+import { DialogEditFilebotExecutorComponent } from '../dialog-edit-filebot-executor/dialog-edit-filebot-executor.component';
 
 export interface TypeContent {
   key: Type;
@@ -37,6 +40,7 @@ export interface TorrentPageContent {
   key: TorrentPage;
   value: string;
 }
+
 
 
 export interface PageableData {
@@ -60,10 +64,12 @@ export interface PageableData {
   ],
 })
 export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['path', 'newPath', 'fileName', 'newFileName', 'status', 'delete', 'reExecute'];
+  displayedColumns: string[] = ['path', 'newPath', 'fileName', 'newFileName', 'status', 'edit', 'delete', 'reExecute'];
 
   @Input() pageSize: number;
   @Input() paginator: boolean;
+
+  actualPage: number = 0;
 
   resultsLength = 0;
   data: PageableData = {
@@ -73,7 +79,8 @@ export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
 
   constructor(
     private filebotExecutorService: FilebotExecutorService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private matDialog: MatDialog) {
 
   }
 
@@ -81,10 +88,27 @@ export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
 
 
   }
+  reloadData() {
+    this.data.loading = true;
+    this.filebotExecutorService.getAllByPageable(this.actualPage, this.pageSize).subscribe(
+      (nextNews) => {
+        const contentData = nextNews.content;
+        contentData.forEach(element => {
+          element.path = element.path.substring(element.path.lastIndexOf('/') + 1);
+          console.log(element.path);
+        });
+        this.data.filebots = contentData;
+        this.data.loading = false;
+        this.resultsLength = nextNews.totalElements;
+      },
+      (error) =>
+        this.snackBar.open('No data to display', undefined, { duration: 4000 })
+    );
+  }
 
   ngAfterViewInit() {
     this.data.loading = true;
-    this.filebotExecutorService.getAllByPageable(0, this.pageSize).subscribe(
+    this.filebotExecutorService.getAllByPageable(this.actualPage, this.pageSize).subscribe(
       (nextNews) => {
         const contentData = nextNews.content;
         contentData.forEach(element => {
@@ -110,7 +134,7 @@ export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
 
   reExecute(filebotExecutor: FilebotExecutor) {
     this.filebotExecutorService
-      .reExecute(filebotExecutor.id)
+      .editFilebotExecutor(filebotExecutor.id, filebotExecutor, true)
       .subscribe(
         (data) => {
           this.snackBar.open('Re-executed', '', {
@@ -121,16 +145,69 @@ export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
       );
   }
 
-  delete() {
+  delete(filebotExecutor: FilebotExecutor) {
+    const dialogRef = this.matDialog.open(DialogDeleteMediaComponent, {
+      width: '50%',
+      height: 'auto',
+      data: filebotExecutor.path
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      // this.loadMedia();
+      if (result) {
+        this.filebotExecutorService.delete(filebotExecutor.id).subscribe(
+          (data) => {
+            this.snackBar.open('Deleted', '', {
+              duration: 2000,
+            });
+            this.reloadData();
+          },
+          (error) => {
+            this.snackBar.open('Error deleting execution', error, {
+              duration: 2000,
+            })
+          });
+      }
+      else {
+        this.snackBar.open('Not Deleted', undefined, { duration: 4000 })
+      }
+    });
 
   }
+
+  edit(filebotExecutor: FilebotExecutor) {
+    const dialogRef = this.matDialog.open(DialogEditFilebotExecutorComponent, {
+      width: '50%',
+      height: 'auto',
+      data: {
+        id: filebotExecutor.id,
+        category: filebotExecutor.category,
+        path: filebotExecutor.path,
+        command: filebotExecutor.command,
+        english: filebotExecutor.english,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+    });
+  }
+
+  add() {
+    const dialogRef = this.matDialog.open(DialogAddQbittorrentComponent, {
+      width: '50%',
+      height: 'auto',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.reloadData();
+    });
+  }
+
 
   pageEvents(event) {
     console.log("PAGE EVENT")
     if (this.data.loading) { return; }
-
     this.data.loading = true;
-    this.filebotExecutorService.getAllByPageable(event.pageIndex, this.pageSize).subscribe(
+    this.actualPage = event.pageIndex;
+    this.filebotExecutorService.getAllByPageable(this.actualPage, this.pageSize).subscribe(
       (nextNews) => {
         const contentData = nextNews.content;
         contentData.forEach(element => {

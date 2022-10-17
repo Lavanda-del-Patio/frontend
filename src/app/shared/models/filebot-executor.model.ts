@@ -6,7 +6,7 @@ export interface FilebotExecutor {
     newPath?: string
     category?: string;
     command?: string;
-    englisth?: boolean;
+    english?: boolean;
     expireAfterFourteenDays?: string;
     status?: FilebotExecutorStatus;
 }
