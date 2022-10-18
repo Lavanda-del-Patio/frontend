@@ -81,7 +81,7 @@ export class DialogEditFilebotExecutorComponent implements OnInit {
     if (this.redoCommand) {
       filebotExecutor.command = null;
     }
-    this.filebotExecutorService.editFilebotExecutor(this.data.id, filebotExecutor, true).pipe(take(1)).subscribe((res) => {
+    this.filebotExecutorService.editFilebotExecutor(this.data.id, filebotExecutor).pipe(take(1)).subscribe((res) => {
       this.openSnackBar('Edited');
       this.dialogRef.close();
     }
