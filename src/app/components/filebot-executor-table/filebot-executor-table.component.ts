@@ -134,7 +134,7 @@ export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
 
   reExecute(filebotExecutor: FilebotExecutor) {
     this.filebotExecutorService
-      .editFilebotExecutor(filebotExecutor.id, filebotExecutor, true)
+      .editFilebotExecutor(filebotExecutor.id, filebotExecutor)
       .subscribe(
         (data) => {
           this.snackBar.open('Re-executed', '', {

@@ -85,7 +85,7 @@ export class FilebotExecutorComponent implements OnInit {
 
   reExecute() {
     this.filebotExecutorService
-      .editFilebotExecutor(this.filebotExecutor.id, this.filebotExecutor, true)
+      .editFilebotExecutor(this.filebotExecutor.id, this.filebotExecutor)
       .subscribe(
         (data) => {
           this.snackBar.open('Re-executed', '', {

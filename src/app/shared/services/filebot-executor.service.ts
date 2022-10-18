@@ -18,9 +18,10 @@ export class FilebotExecutorService {
   }
 
 
-  editFilebotExecutor(id: string, filebotExecutor: FilebotExecutor, force: boolean): Observable<FilebotExecutor> {
-    return this.httpClient.put<FilebotExecutor>(environment.apiUrl + 'filebot-executor/' + id + '?force=' + force, filebotExecutor);
+  editFilebotExecutor(id: string, filebotExecutor: FilebotExecutor): Observable<FilebotExecutor> {
+    return this.httpClient.patch<FilebotExecutor>(environment.apiUrl + 'filebot-executor/' + id, filebotExecutor);
   }
+
   delete(id: string): Observable<any> {
     return this.httpClient.delete(environment.apiUrl + 'filebot-executor/' + id);
   }
