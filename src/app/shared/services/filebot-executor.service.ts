@@ -33,4 +33,8 @@ export class FilebotExecutorService {
   createQbittorrent(qbittorrent: Qbittorrent): Observable<Qbittorrent> {
     return this.httpClient.post<Qbittorrent>(environment.apiUrl + 'filebot-executor', qbittorrent);
   }
+
+  manualExecution(): Observable<FilebotExecutor> {
+    return this.httpClient.post<Qbittorrent>(environment.apiUrl + 'filebot-executor/execute', null);
+  }
 }

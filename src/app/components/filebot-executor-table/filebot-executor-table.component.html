@@ -6,6 +6,10 @@
     <button mat-icon-button aria-label="Reload" (click)="reloadData()" matTooltip="Reload">
       <mat-icon>autorenew</mat-icon>
     </button>
+    <button mat-icon-button aria-label="Throw the manual execution of filebot" (click)="manualExecution()"
+      matTooltip="Throw the manual execution of filebot">
+      <mat-icon>play_circle_outline</mat-icon>
+    </button>
   </div>
 </div>
 <div *ngIf="data.filebots.length > 0;else noContent">

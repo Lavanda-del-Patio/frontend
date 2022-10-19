@@ -145,6 +145,19 @@ export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
       );
   }
 
+  manualExecution() {
+    this.filebotExecutorService
+      .manualExecution()
+      .subscribe(
+        (data) => {
+          this.snackBar.open('Manual Execution started', '', {
+            duration: 2000,
+          });
+        }
+      );
+
+  }
+
   delete(filebotExecutor: FilebotExecutor) {
     const dialogRef = this.matDialog.open(DialogDeleteMediaComponent, {
       width: '50%',
