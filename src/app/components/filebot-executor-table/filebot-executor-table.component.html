@@ -1,16 +1,30 @@
-<div class="container">
-  <div class="center">
-    <button mat-icon-button aria-label="Add Execution" (click)="add()" matTooltip="Add Execution">
-      <mat-icon>library_add</mat-icon>
-    </button>
-    <button mat-icon-button aria-label="Reload" (click)="reloadData()" matTooltip="Reload">
-      <mat-icon>autorenew</mat-icon>
-    </button>
-    <button mat-icon-button aria-label="Throw the manual execution of filebot" (click)="manualExecution()"
-      matTooltip="Throw the manual execution of filebot">
-      <mat-icon>play_circle_outline</mat-icon>
-    </button>
-  </div>
+<div class="padding-top" *ngIf="fullPage" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+  <!-- <div class="center"> -->
+  <button mat-icon-button aria-label="Add Execution" (click)="add()" matTooltip="Add Execution">
+    <mat-icon>library_add</mat-icon>
+  </button>
+  <button mat-icon-button aria-label="Reload" (click)="reloadData()" matTooltip="Reload">
+    <mat-icon>autorenew</mat-icon>
+  </button>
+  <button mat-icon-button aria-label="Throw the manual execution of filebot" (click)="manualExecution()"
+    matTooltip="Throw the manual execution of filebot">
+    <mat-icon>play_circle_outline</mat-icon>
+  </button>
+  <form class="form-group-search" [formGroup]="form">
+    <mat-form-field appearance="standard">
+      <mat-label>Search</mat-label>
+      <input formControlName="search" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option *ngFor="let stat of status" [value]="stat">{{stat}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <!-- </div> -->
 </div>
 <div *ngIf="data.filebots.length > 0;else noContent">
   <div class="example-container mat-elevation-z8">

@@ -1,32 +1,24 @@
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { FilebotService } from '../../shared/services/filebot.service';
-import {
-  FeedFilm,
-  Type,
-  TorrentPage,
-  Torrent,
-} from '../../shared/models/feed-film.model';
-import { Inject, Component, OnInit, Input, ViewChild, Output, EventEmitter, AfterViewInit } from '@angular/core';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
-import { MatSelectChange } from '@angular/material/select';
-import { DialogDeleteMediaComponent } from '../dialog-delete-media/dialog-delete-media.component';
-import { MatTable } from '@angular/material/table';
-import { FilebotExecutorService } from 'src/app/shared/services/filebot-executor.service';
-import { FilebotExecutor } from 'src/app/shared/models/filebot-executor.model';
 import {
   animate,
   state,
   style,
   transition,
-  trigger,
+  trigger
 } from '@angular/animations';
-import { PageEvent } from '@angular/material/paginator';
-import { Qbittorrent } from 'src/app/shared/models/qbittorrent.model';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  MatDialog
+} from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { debounceTime } from 'rxjs/operators';
+import { FilebotExecutor, FilebotExecutorStatus } from 'src/app/shared/models/filebot-executor.model';
+import { FilebotExecutorService } from 'src/app/shared/services/filebot-executor.service';
+import {
+  TorrentPage, Type
+} from '../../shared/models/feed-film.model';
 import { DialogAddQbittorrentComponent } from '../dialog-add-qbittorrent/dialog-add-qbittorrent.component';
+import { DialogDeleteMediaComponent } from '../dialog-delete-media/dialog-delete-media.component';
 import { DialogEditFilebotExecutorComponent } from '../dialog-edit-filebot-executor/dialog-edit-filebot-executor.component';
 
 export interface TypeContent {
@@ -68,6 +60,7 @@ export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
 
   @Input() pageSize: number;
   @Input() paginator: boolean;
+  @Input() fullPage: boolean = false
 
   actualPage: number = 0;
 
@@ -76,26 +69,56 @@ export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
     filebots: [],
     loading: false,
   };
+  form: FormGroup;
+  status: String[];
+  statusSelected: string = null;
+  searchInput: string = null;
+  debounceTime = 500;
+
 
   constructor(
     private filebotExecutorService: FilebotExecutorService,
     private snackBar: MatSnackBar,
-    private matDialog: MatDialog) {
+    private matDialog: MatDialog,
+    private formBuilder: FormBuilder,
+  ) {
+    this.status = Object.keys(FilebotExecutorStatus).filter((v) => isNaN(Number(v)));
+
 
   }
 
   ngOnInit(): void {
+    this.form = new FormGroup({
+      status: new FormControl(''),
+      search: new FormControl(''),
+    });
+    this.form.valueChanges.pipe(
+      debounceTime(this.debounceTime),
+    ).subscribe(changes => this.formChanged(changes));
+  }
 
+
+  formChanged(currentValue: any) {
+    const fields = ['search', 'status', 'email'];
+    this.statusSelected = this.form.get('status').value;
+    this.searchInput = this.form.get('search').value;
+
+    this.reloadData();
+    // if(this.userValue[fieldName] !== currentValue[fieldName]) {
+    //   console.log('Came inside');
+    //   this.disableButton = false;
+    //   return;
+    // }
 
   }
   reloadData() {
     this.data.loading = true;
-    this.filebotExecutorService.getAllByPageable(this.actualPage, this.pageSize).subscribe(
+    this.filebotExecutorService.getAllByPageable(this.actualPage, this.pageSize, this.searchInput, this.statusSelected).subscribe(
       (nextNews) => {
         const contentData = nextNews.content;
         contentData.forEach(element => {
           element.path = element.path.substring(element.path.lastIndexOf('/') + 1);
-          console.log(element.path);
+          // console.log(element.path);
         });
         this.data.filebots = contentData;
         this.data.loading = false;
@@ -108,12 +131,12 @@ export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.data.loading = true;
-    this.filebotExecutorService.getAllByPageable(this.actualPage, this.pageSize).subscribe(
+    this.filebotExecutorService.getAllByPageable(this.actualPage, this.pageSize, this.searchInput, this.statusSelected).subscribe(
       (nextNews) => {
         const contentData = nextNews.content;
         contentData.forEach(element => {
           element.path = element.path.substring(element.path.lastIndexOf('/') + 1);
-          console.log(element.path);
+          // console.log(element.path);
         });
         this.data.filebots = contentData;
         this.data.loading = false;
@@ -220,7 +243,7 @@ export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
     if (this.data.loading) { return; }
     this.data.loading = true;
     this.actualPage = event.pageIndex;
-    this.filebotExecutorService.getAllByPageable(this.actualPage, this.pageSize).subscribe(
+    this.filebotExecutorService.getAllByPageable(this.actualPage, this.pageSize, this.searchInput, this.statusSelected).subscribe(
       (nextNews) => {
         const contentData = nextNews.content;
         contentData.forEach(element => {
