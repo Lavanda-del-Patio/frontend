@@ -3,7 +3,7 @@ import { FeedFilm } from '../models/feed-film.model';
 import { Pageable } from '../models/pageable.model';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FilebotExecutor } from '../models/filebot-executor.model';
 import { Qbittorrent } from '../models/qbittorrent.model';
@@ -13,8 +13,18 @@ export class FilebotExecutorService {
   constructor(private httpClient: HttpClient) { }
 
 
-  getAllByPageable(page: number, pageSize: number): Observable<Pageable> {
-    return this.httpClient.get<Pageable>(environment.apiUrl + 'filebot-executor?page=' + page + '&size=' + pageSize);
+  getAllByPageable(page: number, pageSize: number, path?: string, status?: string): Observable<Pageable> {
+    let params = new HttpParams();
+    // ?page = ' + page + ' & size=' + pageSize + ' & path=' + path + ' & status=' + status
+
+    params = params.set('pageSize', pageSize);
+    if (path) {
+      params = params.set('path', path);
+    }
+    if (status) {
+      params = params.set('status', status);
+    }
+    return this.httpClient.get<Pageable>(environment.apiUrl + 'filebot-executor', { params });
   }
 
 

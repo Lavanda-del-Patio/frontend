@@ -1,16 +1,17 @@
 export interface FilebotExecutor {
-    id: string;
-    files?: string[];
-    newFiles?: string[];
-    path?: string;
-    newPath?: string
-    category?: string;
-    command?: string;
-    english?: boolean;
-    expireAfterFourteenDays?: string;
-    status?: FilebotExecutorStatus;
+  id: string;
+  files?: string[];
+  newFiles?: string[];
+  path?: string;
+  newPath?: string
+  category?: string;
+  command?: string;
+  english?: boolean;
+  expireAfterFourteenDays?: string;
+  status?: FilebotExecutorStatus;
 }
 
 export enum FilebotExecutorStatus {
-    UNPROCESSED, PROCESSING, PROCESSED, PROCESSED_EXISTED, ERROR, FILES_NOT_FOUND
+  UNPROCESSED, ON_TELEGRAM, PENDING, ON_FILEBOT_EXECUTION, PROCESSED, FILES_EXISTED_IN_DESTINATION, ERROR,
+  FILES_NOT_FOUND
 }

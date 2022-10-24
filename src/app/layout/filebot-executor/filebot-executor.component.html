@@ -1,19 +1,3 @@
-<!-- <div class="example-container mat-elevation-z8">
-  <filebot-executor-table-app [pageSize]=20 [paginator]="true"></filebot-executor-table-app>
-</div> -->
-
-
-<div>
-  <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around strech" *ngIf="data.filebots.length >1">
-    <!-- <div *ngFor="let item of data.filebots" fxFlex.xl="14%" fxFlex.lg="14%" fxFlex.md="25%" fxFlex.sm="45%"
-      fxFlex.xs="100%"> -->
-    <!-- <filebot-executor-app [filebotExecutor]="item"></filebot-executor-app> -->
-    <filebot-executor-table-app [pageSize]=20 [paginator]="true"></filebot-executor-table-app>
-    <!-- <app-card-film fxFlex [film]="item" (deleted)="deletedFilm($event)" (updated)="updatedFilm($event)"></app-card-film> -->
-    <!-- </div> -->
-  </div>
-</div>
-
 <div class="example-container mat-elevation-z8">
-  <filebot-executor-table-app [pageSize]=20 [paginator]="true"></filebot-executor-table-app>
+  <filebot-executor-table-app [pageSize]=20 [paginator]="true" [fullPage]="true"></filebot-executor-table-app>
 </div>
