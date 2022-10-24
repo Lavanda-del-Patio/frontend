@@ -55,6 +55,7 @@ export interface PageableData {
     ]),
   ],
 })
+
 export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['path', 'newPath', 'fileName', 'newFileName', 'status', 'edit', 'delete', 'reExecute'];
 
@@ -70,7 +71,7 @@ export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
     loading: false,
   };
   form: FormGroup;
-  status: String[];
+  status: String[] = [];
   statusSelected: string = null;
   searchInput: string = null;
   debounceTime = 500;
@@ -83,10 +84,15 @@ export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
   ) {
     this.status = Object.keys(FilebotExecutorStatus).filter((v) => isNaN(Number(v)));
-
-
+    this.status.reverse();
+    this.status.push(null);
+    this.status.reverse();
   }
-
+   enumToArrayNames<Type>(data: Type): string[] {
+    return Object.keys(data).filter(
+      (topping: string) => !new RegExp(/[0-9]/g).test(topping)
+    );
+  }
   ngOnInit(): void {
     this.form = new FormGroup({
       status: new FormControl(''),
