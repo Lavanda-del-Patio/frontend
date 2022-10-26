@@ -18,6 +18,8 @@ export class FilebotExecutorService {
     // ?page = ' + page + ' & size=' + pageSize + ' & path=' + path + ' & status=' + status
 
     params = params.set('pageSize', pageSize);
+    params = params.set('page', page);
+
     if (path) {
       params = params.set('path', path);
     }
