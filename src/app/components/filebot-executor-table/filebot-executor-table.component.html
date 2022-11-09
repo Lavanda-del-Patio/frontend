@@ -33,12 +33,13 @@
 
         <ng-container matColumnDef="path">
           <th mat-header-cell *matHeaderCellDef> Path </th>
-          <td mat-cell *matCellDef="let element"> {{element.path}} </td>
+          <!-- <td mat-cell *matCellDef="let element" [matTooltip]="element.path"> {{element.path | slice:0:32}} </td> -->
+          <td mat-cell *matCellDef="let element" [matTooltip]="element.path"> {{element.path}} </td>
         </ng-container>
 
         <ng-container matColumnDef="newPath">
           <th mat-header-cell *matHeaderCellDef> New Path </th>
-          <td mat-cell *matCellDef="let element"> {{element.newPath}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.newPath }} </td>
         </ng-container>
 
         <ng-container matColumnDef="fileName">
@@ -62,7 +63,17 @@
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef> Status </th>
           <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        </ng-container>
 
+
+        <ng-container matColumnDef="download">
+          <th mat-header-cell *matHeaderCellDef> Log </th>
+          <td mat-cell *matCellDef="let element">
+            <button *ngIf="element.log" mat-icon-button aria-label="Download Log" (click)="downloadLog(element)"
+              matTooltip="Download Log">
+              <mat-icon>cloud_download</mat-icon>
+            </button>
+          </td>
         </ng-container>
 
 
