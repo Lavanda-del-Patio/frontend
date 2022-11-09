@@ -57,8 +57,8 @@ export interface PageableData {
 })
 
 export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['path', 'newPath', 'fileName', 'newFileName', 'status', 'edit', 'delete', 'reExecute'];
-
+  displayedColumns: string[] = ['path', 'newPath', 'fileName', 'newFileName', 'status', 'download', 'edit', 'delete', 'reExecute'];
+  panelOpenState = false;
   @Input() pageSize: number;
   @Input() paginator: boolean;
   @Input() fullPage: boolean = false
@@ -88,11 +88,7 @@ export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
     this.status.push(null);
     this.status.reverse();
   }
-   enumToArrayNames<Type>(data: Type): string[] {
-    return Object.keys(data).filter(
-      (topping: string) => !new RegExp(/[0-9]/g).test(topping)
-    );
-  }
+
   ngOnInit(): void {
     this.form = new FormGroup({
       status: new FormControl(''),
@@ -241,6 +237,20 @@ export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.reloadData();
     });
+  }
+  downloadLog(filebotExecutor: FilebotExecutor) {
+    this.filebotExecutorService.downloadLog(filebotExecutor.log);
+    // .subscribe(
+    //   (data) => {
+    //     this.snackBar.open('Downloaded', '', {
+    //       duration: 2000,
+    //     });
+    //   },
+    //   (error) => {
+    //     this.snackBar.open('Error downloading log', error, {
+    //       duration: 2000,
+    //     })
+    //   });
   }
 
 

@@ -9,6 +9,7 @@ export interface FilebotExecutor {
   english?: boolean;
   expireAfterFourteenDays?: string;
   status?: FilebotExecutorStatus;
+  log?: string;
 }
 
 export enum FilebotExecutorStatus {
