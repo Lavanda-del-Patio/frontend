@@ -1,5 +1,3 @@
-import { Filebot } from '../models/filebot.model';
-import { FeedFilm } from '../models/feed-film.model';
 import { Pageable } from '../models/pageable.model';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
@@ -46,10 +44,16 @@ export class FilebotExecutorService {
     return this.httpClient.post<Qbittorrent>(environment.apiUrl + 'filebot-executor', qbittorrent);
   }
 
-  manualExecution(): Observable<FilebotExecutor> {
+  manualExecution(): Observable<Qbittorrent> {
     return this.httpClient.post<Qbittorrent>(environment.apiUrl + 'filebot-executor/execute', null);
   }
 
+  manualExecutionMovie(): Observable<Qbittorrent> {
+    return this.httpClient.post<Qbittorrent>(environment.apiUrl + 'filebot-executor/execute/movie', null);
+  }
+  manualExecutionShow(): Observable<Qbittorrent> {
+    return this.httpClient.post<Qbittorrent>(environment.apiUrl + 'filebot-executor/execute/show', null);
+  }
   downloadLog(data: string) {
     const blob = new Blob([data], { type: 'text/plain' });
     const url = window.URL.createObjectURL(blob);
