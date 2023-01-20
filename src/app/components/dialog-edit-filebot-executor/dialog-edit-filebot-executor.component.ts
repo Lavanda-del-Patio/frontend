@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { take, finalize } from 'rxjs/operators';
 import { } from 'buffer';
 import { FilebotExecutorService } from 'src/app/shared/services/filebot-executor.service';
+import { FilebotExecutorAction } from 'src/app/shared/models/filebot-executor.model';
 @Component({
   selector: 'app-dialog-edit-filebot-executor',
   templateUrl: './dialog-edit-filebot-executor.component.html',
@@ -19,6 +20,8 @@ export class DialogEditFilebotExecutorComponent implements OnInit {
   loading = true;
   allFiles = [];
   categorys = ['radarr', 'tv-sonarr', 'tv-sonarr-en'];
+  actions = Object.values(FilebotExecutorAction);;
+
   englishValues = ['true', 'false'];
   qbittorrentFormGroup!: FormGroup;
 
@@ -47,7 +50,8 @@ export class DialogEditFilebotExecutorComponent implements OnInit {
       file: [this.data.path, Validators.required],
       category: [this.data.category, Validators.required],
       command: [{ value: this.data.command, disabled: true}, Validators.required],
-      redoCommand: this.redoCommand
+      redoCommand: this.redoCommand,
+      action: [this.data.action, Validators.required],
       // english: [this.data.english, Validators.required],
     });
 
@@ -77,6 +81,8 @@ export class DialogEditFilebotExecutorComponent implements OnInit {
       path: this.qbittorrentFormGroup.get('file')?.value,
       category: this.qbittorrentFormGroup.get('category')?.value,
       command: this.qbittorrentFormGroup.get('command')?.value,
+      status: this.data.status,
+      action: this.qbittorrentFormGroup.get('action')?.value.toUpperCase(),
     }
     if (this.redoCommand) {
       filebotExecutor.command = null;
