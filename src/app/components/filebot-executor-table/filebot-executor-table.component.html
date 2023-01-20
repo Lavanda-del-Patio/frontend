@@ -10,6 +10,15 @@
     matTooltip="Throw the manual execution of filebot">
     <mat-icon>play_circle_outline</mat-icon>
   </button>
+
+  <button mat-icon-button aria-label="Throw the manual execution of filebot for MOVIE" (click)="manualExecutionMovie()"
+    matTooltip="Throw the manual execution of filebot for MOVIE">
+    <mat-icon>cancel_presentation</mat-icon>
+  </button>
+  <button mat-icon-button aria-label="Throw the manual execution of filebot for SHOW" (click)="manualExecutionShow()"
+    matTooltip="Throw the manual execution of filebot for SHOW">
+    <mat-icon>cancel_presentation</mat-icon>
+  </button>
   <form class="form-group-search" [formGroup]="form">
     <mat-form-field appearance="standard">
       <mat-label>Search</mat-label>

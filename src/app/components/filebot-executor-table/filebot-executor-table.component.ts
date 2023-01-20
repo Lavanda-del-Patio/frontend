@@ -14,24 +14,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { debounceTime } from 'rxjs/operators';
 import { FilebotExecutor, FilebotExecutorStatus } from 'src/app/shared/models/filebot-executor.model';
 import { FilebotExecutorService } from 'src/app/shared/services/filebot-executor.service';
-import {
-  TorrentPage, Type
-} from '../../shared/models/feed-film.model';
+
 import { DialogAddQbittorrentComponent } from '../dialog-add-qbittorrent/dialog-add-qbittorrent.component';
 import { DialogDeleteMediaComponent } from '../dialog-delete-media/dialog-delete-media.component';
 import { DialogEditFilebotExecutorComponent } from '../dialog-edit-filebot-executor/dialog-edit-filebot-executor.component';
-
-export interface TypeContent {
-  key: Type;
-  value: string;
-}
-
-
-
-export interface TorrentPageContent {
-  key: TorrentPage;
-  value: string;
-}
 
 
 
@@ -183,6 +169,27 @@ export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
 
   }
 
+
+  manualExecutionMovie(){
+    this.filebotExecutorService.manualExecutionMovie().subscribe(
+      (data) => {
+        this.snackBar.open('Manual Execution started', '', {
+          duration: 2000,
+        });
+      }
+    );
+  }
+
+  manualExecutionShow() {
+    this.filebotExecutorService.manualExecutionShow().subscribe(
+      (data) => {
+        this.snackBar.open('Manual Execution started', '', {
+          duration: 2000,
+        });
+      }
+    );
+  }
+
   delete(filebotExecutor: FilebotExecutor) {
     const dialogRef = this.matDialog.open(DialogDeleteMediaComponent, {
       width: '50%',
@@ -223,6 +230,7 @@ export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
         path: filebotExecutor.path,
         command: filebotExecutor.command,
         english: filebotExecutor.english,
+        action: filebotExecutor.action
       },
     });
     dialogRef.afterClosed().subscribe((result) => {

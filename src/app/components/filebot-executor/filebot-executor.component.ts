@@ -1,11 +1,6 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FilebotService } from '../../shared/services/filebot.service';
-import {
-  FeedFilm,
-  Type,
-  TorrentPage,
-  Torrent,
-} from '../../shared/models/feed-film.model';
+
 import { Inject, Component, OnInit, Input, ViewChild } from '@angular/core';
 import {
   MatDialog,
@@ -25,10 +20,7 @@ import {
   trigger,
 } from '@angular/animations';
 
-export interface TypeContent {
-  key: Type;
-  value: string;
-}
+
 
 export interface PeriodicElement {
   name: string;
@@ -50,10 +42,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
 ];
 
-export interface TorrentPageContent {
-  key: TorrentPage;
-  value: string;
-}
+
 @Component({
   selector: 'filebot-executor-app',
   templateUrl: './filebot-executor.component.html',
