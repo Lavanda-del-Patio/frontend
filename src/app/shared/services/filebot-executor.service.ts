@@ -48,9 +48,6 @@ export class FilebotExecutorService {
     return this.httpClient.post<Qbittorrent>(environment.apiUrl + 'filebot-executor/execute', null);
   }
 
-  manualExecutionMovie(): Observable<Qbittorrent> {
-    return this.httpClient.post<Qbittorrent>(environment.apiUrl + 'filebot-executor/execute/movie', null);
-  }
   manualExecutionShow(): Observable<Qbittorrent> {
     return this.httpClient.post<Qbittorrent>(environment.apiUrl + 'filebot-executor/execute/show', null);
   }

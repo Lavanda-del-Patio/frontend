@@ -170,20 +170,10 @@ export class FilebotExecutorTableComponent implements OnInit, AfterViewInit {
   }
 
 
-  manualExecutionMovie(){
-    this.filebotExecutorService.manualExecutionMovie().subscribe(
-      (data) => {
-        this.snackBar.open('Manual Execution started', '', {
-          duration: 2000,
-        });
-      }
-    );
-  }
-
   manualExecutionShow() {
     this.filebotExecutorService.manualExecutionShow().subscribe(
       (data) => {
-        this.snackBar.open('Manual Execution started', '', {
+        this.snackBar.open('Manual Execution for show started', '', {
           duration: 2000,
         });
       }
