@@ -5,7 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TranscodeApi } from '../../shared/models/transcode.model';
 import { MediaService } from '../../shared/services/media.service';
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, FormControl } from '@angular/forms';
 import { take, finalize } from 'rxjs/operators';
 import {  } from 'buffer';
 @Component({
@@ -17,10 +17,10 @@ export class DialogAddTranscodesComponent implements OnInit {
 
   transcodes!: TranscodeApi;
   loading = true;
-  transcodesFormGroup!: FormGroup;
+  transcodesFormGroup!: UntypedFormGroup;
 
   constructor(public dialogRef: MatDialogRef<DialogAddTranscodesComponent>,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private readonly mediaService: MediaService,
     private snackBar: MatSnackBar) {

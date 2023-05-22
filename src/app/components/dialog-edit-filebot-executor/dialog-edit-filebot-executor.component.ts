@@ -5,7 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TranscodeApi } from '../../shared/models/transcode.model';
 import { MediaService } from '../../shared/services/media.service';
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, FormControl } from '@angular/forms';
 import { take, finalize } from 'rxjs/operators';
 import { } from 'buffer';
 import { FilebotExecutorService } from 'src/app/shared/services/filebot-executor.service';
@@ -23,12 +23,12 @@ export class DialogEditFilebotExecutorComponent implements OnInit {
   actions = Object.values(FilebotExecutorAction);;
 
   englishValues = ['true', 'false'];
-  qbittorrentFormGroup!: FormGroup;
+  qbittorrentFormGroup!: UntypedFormGroup;
 
   redoCommand: boolean = true
 
   constructor(public dialogRef: MatDialogRef<DialogEditFilebotExecutorComponent>,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private snackBar: MatSnackBar,
     private readonly filebotExecutorService: FilebotExecutorService) {

@@ -5,7 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TranscodeApi } from '../../shared/models/transcode.model';
 import { MediaService } from '../../shared/services/media.service';
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, FormControl } from '@angular/forms';
 import { take, finalize } from 'rxjs/operators';
 import { } from 'buffer';
 import { FilebotExecutorService } from 'src/app/shared/services/filebot-executor.service';
@@ -19,10 +19,10 @@ export class DialogAddQbittorrentComponent implements OnInit {
   loading = true;
   allFiles = [];
   categorys = ['radarr', 'tv-sonarr', 'tv-sonarr-en']
-  qbittorrentFormGroup!: FormGroup;
+  qbittorrentFormGroup!: UntypedFormGroup;
 
   constructor(public dialogRef: MatDialogRef<DialogAddQbittorrentComponent>,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private snackBar: MatSnackBar,
     private readonly filebotExecutorService: FilebotExecutorService) {

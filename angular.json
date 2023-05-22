@@ -133,7 +133,6 @@
       }
     }
   },
-  "defaultProject": "lavanda-frontend",
   "cli": {
     "analytics": false
   }

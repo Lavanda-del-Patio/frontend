@@ -7,7 +7,7 @@ import {
   trigger
 } from '@angular/animations';
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import {
   MatDialog
 } from '@angular/material/dialog';
@@ -65,7 +65,7 @@ export class FilebotExecutorComponent {
 
 
 
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   // constructor(
   //   private filebotExecutorService: FilebotExecutorService,
@@ -126,22 +126,22 @@ export class FilebotExecutorComponent {
     private filebotExecutorService: FilebotExecutorService,
     private snackBar: MatSnackBar,
     private matDialog: MatDialog,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
   ) {
     this.status = Object.keys(FilebotExecutorStatus).filter((v) => isNaN(Number(v)));
     this.status.reverse();
     this.status.push(null);
     this.status.reverse();
-    this.form = new FormGroup({
-      status: new FormControl(''),
-      search: new FormControl(''),
+    this.form = new UntypedFormGroup({
+      status: new UntypedFormControl(''),
+      search: new UntypedFormControl(''),
     });
   }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      status: new FormControl(''),
-      search: new FormControl(''),
+    this.form = new UntypedFormGroup({
+      status: new UntypedFormControl(''),
+      search: new UntypedFormControl(''),
     });
     this.form.valueChanges.pipe(
       debounceTime(this.debounceTime),
