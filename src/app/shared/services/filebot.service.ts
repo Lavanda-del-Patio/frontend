@@ -1,5 +1,4 @@
 import { Filebot } from './../models/filebot.model';
-import { FeedFilm } from './../models/feed-film.model';
 import { Pageable } from './../models/pageable.model';
 import { environment } from './../../../environments/environment';
 import { Observable } from 'rxjs';

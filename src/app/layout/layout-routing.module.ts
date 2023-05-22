@@ -18,18 +18,25 @@ const routes: Routes = [
       { path: '', loadChildren: () => import('./plex/plex.module').then(m => m.PlexModule) },
     ]
   },
-  {
-    path: 'automation',
-    component: LayoutComponent,
-    children: [
-      { path: '', loadChildren: () => import('./automation/automation.module').then(m => m.AutomationModule) },
-    ]
-  },
+  // {
+  //   path: 'automation',
+  //   component: LayoutComponent,
+  //   children: [
+  //     { path: '', loadChildren: () => import('./automation/automation.module').then(m => m.AutomationModule) },
+  //   ]
+  // },
   {
     path: 'filebot',
     component: LayoutComponent,
     children: [
-      { path: '', loadChildren: () => import('./filebot/filebot.module').then(m => m.FilebotModule) },
+      { path: '', loadChildren: () => import('./filebot-reports/filebot.module').then(m => m.FilebotModule) },
+    ]
+  },
+  {
+    path: 'atomohd',
+    component: LayoutComponent,
+    children: [
+      { path: '', loadChildren: () => import('./atomohd/atomohd.module').then(m => m.AtomohdModule) },
     ]
   },
   {

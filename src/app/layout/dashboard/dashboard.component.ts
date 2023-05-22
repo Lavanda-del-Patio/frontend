@@ -1,7 +1,3 @@
-import { FeedShowsService } from './../../shared/services/feed-shows.service';
-import { FeedFilmsService } from './../../shared/services/feed-films.service';
-import { FeedShow } from './../../shared/models/feed-show.model';
-import { FeedFilm } from './../../shared/models/feed-film.model';
 import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
 import { MediaService } from '../../shared/services/media.service';
 import { Observable, Subscription } from 'rxjs';
@@ -18,8 +14,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   onConversion: boolean = false;
   loading: boolean = false;
   gridColumns = 6
-  lastFilms: FeedFilm[] = [];
-  lastShows: FeedShow[] = [];
+  // lastFilms: FeedFilm[] = [];
+  // lastShows: FeedShow[] = [];
 
   lastPlexFilms: any[] = [];
   lastPlexShows: any[] = []
@@ -28,22 +24,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private mediaService: MediaService,
-    private feedFilmService: FeedFilmsService,
-    private feedShowsService: FeedShowsService
   ) {
   }
 
   ngOnInit() {
-    this.feedFilmService.getLastFilms().subscribe(
-      (response) => {
-        this.lastFilms = response;
-      },
-      (error) => console.log(error))
-    this.feedShowsService.getLastShows().subscribe(
-      (response) => {
-        this.lastShows = response;
-      },
-      (error) => console.log(error))
+    // this.feedFilmService.getLastFilms().subscribe(
+    //   (response) => {
+    //     this.lastFilms = response;
+    //   },
+    //   (error) => console.log(error))
+    // this.feedShowsService.getLastShows().subscribe(
+    //   (response) => {
+    //     this.lastShows = response;
+    //   },
+    //   (error) => console.log(error))
   }
 
 

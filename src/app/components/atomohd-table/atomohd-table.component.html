@@ -1,0 +1,72 @@
+<div class="padding-top" *ngIf="fullPage" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+  <!-- <div class="center"> -->
+  <!-- <button mat-icon-button aria-label="Add Execution" (click)="add()" matTooltip="Add Execution">
+    <mat-icon>library_add</mat-icon>
+  </button> -->
+  <button mat-icon-button aria-label="Reload" (click)="reloadData()" matTooltip="Reload">
+    <mat-icon>autorenew</mat-icon>
+  </button>
+  <!-- <button mat-icon-button aria-label="Throw the manual execution of filebot" (click)="manualExecution()"
+    matTooltip="Throw the manual execution of filebot">
+    <mat-icon>play_circle_outline</mat-icon>
+  </button> -->
+
+  <!-- <button mat-icon-button aria-label="Throw the manual execution of filebot for SHOW" (click)="manualExecutionShow()"
+    matTooltip="Throw the manual execution of filebot for SHOW">
+    <mat-icon>cancel_presentation</mat-icon>
+  </button> -->
+  <form class="form-group-search" [formGroup]="form">
+    <mat-form-field appearance="standard">
+      <mat-label>Search</mat-label>
+      <input formControlName="search" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option *ngFor="let stat of status" [value]="stat">{{stat}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <!-- </div> -->
+</div>
+<div *ngIf="data.atomos.length > 0;else noContent">
+  <div class="example-container mat-elevation-z8">
+    <div class="example-table-container">
+      <table mat-table [dataSource]="data.atomos" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <!-- <td mat-cell *matCellDef="let element" [matTooltip]="element.path"> {{element.path | slice:0:32}} </td> -->
+          <td mat-cell *matCellDef="let element" [matTooltip]="element.name"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fullName">
+          <th mat-header-cell *matHeaderCellDef> Full Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.fullName }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="seeders">
+          <th mat-header-cell *matHeaderCellDef> Seeders </th>
+          <td mat-cell *matCellDef="let element"> {{element.seeders }} </td>
+        </ng-container>
+        <ng-container matColumnDef="leechers">
+          <th mat-header-cell *matHeaderCellDef> Leechers </th>
+          <td mat-cell *matCellDef="let element"> {{element.leechers }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+  <mat-paginator *ngIf="paginator && data.atomos.length > 0" (page)="pageEvents($event)" [length]="resultsLength"
+    [pageSize]="pageSize">
+  </mat-paginator>
+</div>
+<ng-template #noContent>
+  <div class="center">
+    <p>No Content</p>
+  </div>
+</ng-template>

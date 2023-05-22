@@ -12,6 +12,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FilebotExecutorRoutingModule } from './filebot-executor-routing.module';
 import { FilebotExecutorComponent } from './filebot-executor.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -29,7 +35,13 @@ import { FilebotExecutorComponent } from './filebot-executor.component';
         MatButtonModule,
         FloatPlayerModule,
         MatDialogModule,
-        
+        MatCardModule,
+        MatGridListModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        FlexLayoutModule,
+        ReactiveFormsModule,
+        FormsModule,
     ],
     declarations: [
         FilebotExecutorComponent,

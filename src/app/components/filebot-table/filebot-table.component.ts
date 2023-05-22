@@ -1,6 +1,5 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FilebotService } from './../../shared/services/filebot.service';
-import { FeedFilm, Type, TorrentPage, Torrent } from '../../shared/models/feed-film.model';
 import { Inject, Component, OnInit, Input } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
@@ -8,15 +7,7 @@ import { DialogDeleteMediaComponent } from '../dialog-delete-media/dialog-delete
 import { Filebot } from 'src/app/shared/models/filebot.model';
 
 
-export interface TypeContent {
-  key: Type
-  value: string
-}
 
-export interface TorrentPageContent {
-  key: TorrentPage
-  value: string
-}
 @Component({
   selector: 'filebot-table-app',
   templateUrl: './filebot-table.component.html',

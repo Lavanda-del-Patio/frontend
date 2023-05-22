@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { FeedFilm } from '../../shared/models/feed-film.model';
 
 @Component({
   selector: 'app-card-film-without-title',
@@ -9,7 +8,7 @@ import { FeedFilm } from '../../shared/models/feed-film.model';
 })
 export class CardFilmWithoutTitleComponent implements OnInit {
 
-  @Input() film!: FeedFilm;
+  // @Input() film!: FeedFilm;
 
   defaultImage = "/assets/images/default-image-3.png"
 
@@ -22,10 +21,12 @@ export class CardFilmWithoutTitleComponent implements OnInit {
   }
 
   getImage() {
-    if (this.film.image === null || this.film.image === 'https://image.tmdb.org/t/p/originalnull') {
-      return this.defaultImage
-    }
-    else { return this.film.image }
+    // if (this.film.image === null || this.film.image === 'https://image.tmdb.org/t/p/originalnull') {
+    //   return this.defaultImage
+    // }
+    // else { return this.film.image }
+
+    return 'https://image.tmdb.org/t/p/originalnull';
   }
 
 }

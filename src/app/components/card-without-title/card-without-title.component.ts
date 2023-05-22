@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { FeedFilm } from '../../shared/models/feed-film.model';
 
 @Component({
   selector: 'app-card-without-title',

@@ -1,5 +1,3 @@
-import { FeedFilm } from './../../shared/models/feed-film.model';
-import { FeedFilmsService } from './../../shared/services/feed-films.service';
 import { UserService } from './../../shared/services/user.service';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Subscription, BehaviorSubject, Subject } from 'rxjs';
@@ -24,7 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Input() sidenav!: MatSidenav;
   isAuthenticated = false;
   userName: any;
-  searchs: FeedFilm[] = [];
+  // searchs: FeedFilm[] = [];
 
   private search$ = new BehaviorSubject('');
   private destroy$ = new Subject<void>();
@@ -32,7 +30,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     public router: Router,
     private readonly userService: UserService,
-    private feedFilmService: FeedFilmsService
   ) {
     // this.subscriptionAuthenticationState = this.oktaAuth.$authenticationState.subscribe(isAuthenticated => this.isAuthenticated = isAuthenticated);
   }
@@ -78,14 +75,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigate(['/automation/films', id]);
   }
   searchOnAutomation(search: string) {
-    if (search) {
-      this.feedFilmService.search(search).subscribe(
-        (result) => {
-          this.searchs = result
-          console.log(this.searchs);
-        }
-      )
-    }
+    // if (search) {
+    //   this.feedFilmService.search(search).subscribe(
+    //     (result) => {
+    //       this.searchs = result
+    //       console.log(this.searchs);
+    //     }
+    //   )
+    // }
   }
 
 
