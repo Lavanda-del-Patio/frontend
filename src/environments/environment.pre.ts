@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api-pre.lavandadelpatio.es/',
-  testing: false
+  testing: false,
+  apiUrl: 'https://api-pre.lavandadelpatio.es/'
 };
