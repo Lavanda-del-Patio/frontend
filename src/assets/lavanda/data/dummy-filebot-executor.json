@@ -1,0 +1,79 @@
+{
+    "content": [
+        {
+            "id": "6458a966c19c893bdaf5731a",
+            "files": [
+                {
+                    "file": "Dungeons & Dragons BD1080.atomohd.care.mkv",
+                    "newFile": "Dungeons & Dragons Honor Among Thieves (2023)_[spa, eng]_1080p_10 Mbps.mkv"
+                },
+                {
+                    "file": "Test.mkv",
+                    "newFile": "TEST2.mkv"
+                }
+            ],
+            "path": "/media/Torrenting/Dungeons & Dragons [BluRay 1080p][AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN]",
+            "newPath": "Dungeons & Dragons Honor Among Thieves (2023)",
+            "category": "radarr",
+            "command": "filebot -script 'fn:amc'  --output \"/media\"  --action move  --def movieDB=TheMovieDB seriesDB=TheMovieDB::TV animeDB=AniDB musicDB=ID3  --lang en  --order Airdate  -no-xattr \"/media/Torrenting/Dungeons & Dragons [BluRay 1080p][AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN]\" --def  'movieFormat=/media/Peliculas/{n} ({y})/{n} ({y})_{audioLanguages}_{vf}_{bitrate}'  'seriesFormat=/media/Series/{n}/ Season {s}/{n} s{s.pad(2)}e{e.pad(2)}_{audioLanguages}_{vf}_{bitrate}'  --def 'storeReport=/home/filebot/.reports'  'unsortedFormat=/media/Unsorted/{fn}.{ext}'  --q \"493529\"  --def \"ut_label=movie\" ",
+            "english": false,
+            "action": "MOVE",
+            "manual": false,
+            "status": "PROCESSED",
+            "log": "Run script [fn:amc] at [Wed May 17 16:15:47 CEST 2023]\n\n[PSA] Important Discussion of Proposed Changes:\nhttps://www.filebot.net/forums/viewtopic.php?t=13406\n\nParameter: movieDB = TheMovieDB\nParameter: seriesDB = TheMovieDB::TV\nParameter: animeDB = AniDB\nParameter: musicDB = ID3\nParameter: movieFormat = /media/Peliculas/{n} ({y})/{n} ({y})_{audioLanguages}_{vf}_{bitrate}\nParameter: seriesFormat = /media/Series/{n}/ Season {s}/{n} s{s.pad(2)}e{e.pad(2)}_{audioLanguages}_{vf}_{bitrate}\nParameter: storeReport = /home/filebot/.reports\nParameter: unsortedFormat = /media/Unsorted/{fn}.{ext}\nParameter: ut_label = movie\nArgument[0]: /media/Torrenting/Dungeons & Dragons [BluRay 1080p][AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN]\nInput: /media/Torrenting/Dungeons & Dragons [BluRay 1080p][AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN]/Dungeons & Dragons BD1080.atomohd.care.mkv\nProcess as Movie [movie]\nGroup: {Movie=true} => [Dungeons & Dragons BD1080.atomohd.care.mkv]\nRename movies using [TheMovieDB]\nLooking up movie by query [493529]\nStripping invalid characters from the output file path: /media/Peliculas/Dungeons & Dragons: Honor Among Thieves (2023)/Dungeons & Dragons: Honor Among Thieves (2023)_[spa, eng]_1080p_10 Mbps.mkv\n[MOVE] from [/media/Torrenting/Dungeons & Dragons [BluRay 1080p][AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN]/Dungeons & Dragons BD1080.atomohd.care.mkv] to [/media/Peliculas/Dungeons & Dragons Honor Among Thieves (2023)/Dungeons & Dragons Honor Among Thieves (2023)_[spa, eng]_1080p_10 Mbps.mkv]\nProcessed 1 file\nSaving HTML report to [/home/filebot/.reports/[2023-05-17_16_16]_Dungeons_&_Dragons_BD1080_atomohd_care.html]\nDone ヾ(＠⌒ー⌒＠)ノ\n",
+            "createdAt": "2023-05-08T07:48:54.731+00:00",
+            "lastModifiedAt": "2023-05-17T14:16:01.982+00:00",
+            "expireAfterFourteenDays": null
+        },
+        {
+            "id": "6458a95bc19c893bdaf57319",
+            "files": [
+                {
+                    "file": "Scream VI BD1080.atomohd.cash.mkv",
+                    "newFile": "Scream VI (2023)_[spa, eng]_1080p_10 Mbps.mkv"
+                },
+                {
+                    "file": "Test.mkv",
+                    "newFile": "TEST2.mkv"
+                }
+            ],
+            "path": "/media/Torrenting/Scream VI [BluRay 1080p][EAC3 5.1-AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN]",
+            "newPath": "Scream VI (2023)",
+            "category": "radarr",
+            "command": "filebot -script 'fn:amc'  --output \"/media\"  --action move  --def movieDB=TheMovieDB seriesDB=TheMovieDB::TV animeDB=AniDB musicDB=ID3  --lang en  --order Airdate  -no-xattr \"/media/Torrenting/Scream VI [BluRay 1080p][EAC3 5.1-AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN]\" --def  'movieFormat=/media/Peliculas/{n} ({y})/{n} ({y})_{audioLanguages}_{vf}_{bitrate}'  'seriesFormat=/media/Series/{n}/ Season {s}/{n} s{s.pad(2)}e{e.pad(2)}_{audioLanguages}_{vf}_{bitrate}'  --def 'storeReport=/home/filebot/.reports'  'unsortedFormat=/media/Unsorted/{fn}.{ext}'  --q \"934433\"  --def \"ut_label=movie\" ",
+            "english": false,
+            "action": "MOVE",
+            "manual": false,
+            "status": "PROCESSED",
+            "log": "Run script [fn:amc] at [Wed May 17 16:13:54 CEST 2023]\n\n[PSA] Important Discussion of Proposed Changes:\nhttps://www.filebot.net/forums/viewtopic.php?t=13406\n\nParameter: movieDB = TheMovieDB\nParameter: seriesDB = TheMovieDB::TV\nParameter: animeDB = AniDB\nParameter: musicDB = ID3\nParameter: movieFormat = /media/Peliculas/{n} ({y})/{n} ({y})_{audioLanguages}_{vf}_{bitrate}\nParameter: seriesFormat = /media/Series/{n}/ Season {s}/{n} s{s.pad(2)}e{e.pad(2)}_{audioLanguages}_{vf}_{bitrate}\nParameter: storeReport = /home/filebot/.reports\nParameter: unsortedFormat = /media/Unsorted/{fn}.{ext}\nParameter: ut_label = movie\nArgument[0]: /media/Torrenting/Scream VI [BluRay 1080p][EAC3 5.1-AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN]\nInput: /media/Torrenting/Scream VI [BluRay 1080p][EAC3 5.1-AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN]/Scream VI BD1080.atomohd.cash.mkv\nProcess as Movie [movie]\nGroup: {Movie=true} => [Scream VI BD1080.atomohd.cash.mkv]\nRename movies using [TheMovieDB]\nLooking up movie by query [934433]\n[MOVE] from [/media/Torrenting/Scream VI [BluRay 1080p][EAC3 5.1-AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN]/Scream VI BD1080.atomohd.cash.mkv] to [/media/Peliculas/Scream VI (2023)/Scream VI (2023)_[spa, eng]_1080p_10 Mbps.mkv]\nProcessed 1 file\nSaving HTML report to [/home/filebot/.reports/[2023-05-17_16_14]_Scream_VI_BD1080_atomohd_cash.html]\nDone ヾ(＠⌒ー⌒＠)ノ\n",
+            "createdAt": "2023-05-08T07:48:43.026+00:00",
+            "lastModifiedAt": "2023-05-17T14:14:08.320+00:00",
+            "expireAfterFourteenDays": null
+        }
+    ],
+    "pageable": {
+        "sort": {
+            "unsorted": true,
+            "sorted": false,
+            "empty": true
+        },
+        "pageNumber": 1,
+        "pageSize": 20,
+        "offset": 20,
+        "paged": true,
+        "unpaged": false
+    },
+    "totalPages": 123,
+    "totalElements": 2457,
+    "last": false,
+    "first": false,
+    "numberOfElements": 20,
+    "size": 20,
+    "number": 1,
+    "sort": {
+        "unsorted": true,
+        "sorted": false,
+        "empty": true
+    },
+    "empty": false
+}
