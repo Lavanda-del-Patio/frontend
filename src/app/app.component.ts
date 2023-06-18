@@ -1,20 +1,15 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-} from '@angular/animations';
+import { Component, OnInit } from '@angular/core';
+import { PrimeNGConfig } from 'primeng/api';
+
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  // encapsulation: ViewEncapsulation.None
-
+    selector: 'app-root',
+    templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  constructor() {
+    constructor(private primengConfig: PrimeNGConfig) { }
 
-  }
+    ngOnInit() {
+        this.primengConfig.ripple = true;
+    }
 }
