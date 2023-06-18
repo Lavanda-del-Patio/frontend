@@ -1,39 +1,30 @@
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { LayoutModule } from '@angular/cdk/layout';
-import { CommonModule } from '@angular/common';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { AppRoutingModule } from './app-routing.module';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
-import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
-import { SpinnerInterceptor } from './shared/interceptors/spinner.interceptor';
-
+import { AppRoutingModule } from './app-routing.module';
+import { AppLayoutModule } from './layout/app.layout.module';
+import { NotfoundComponent } from './lavanda/components/notfound/notfound.component';
+import { ProductService } from './lavanda/service/product.service';
+import { CountryService } from './lavanda/service/country.service';
+import { CustomerService } from './lavanda/service/customer.service';
+import { EventService } from './lavanda/service/event.service';
+import { IconService } from './lavanda/service/icon.service';
+import { NodeService } from './lavanda/service/node.service';
+import { PhotoService } from './lavanda/service/photo.service';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserAnimationsModule,
-    BrowserModule,
-    AppRoutingModule,
-    CommonModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    DragDropModule,
-    FormsModule,
-    LayoutModule,
-    FlexLayoutModule,
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent, NotfoundComponent
+    ],
+    imports: [
+        AppRoutingModule,
+        AppLayoutModule
+    ],
+    providers: [
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        CountryService, CustomerService, EventService, IconService, NodeService,
+        PhotoService, ProductService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
