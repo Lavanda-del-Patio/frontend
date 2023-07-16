@@ -1,10 +1,8 @@
 import { environment } from './../../../environments/environment';
-import { Transcode } from './../models/transcode-selected.model';
-import { TranscodeApi } from './../models/transcode.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TranscodeMedia } from '../models/transcodemedia.model';
+import { MediaPath } from '../api/media.model';
 
 @Injectable({ providedIn: 'root' })
 export class MediaService {
@@ -12,37 +10,58 @@ export class MediaService {
     constructor(private httpClient: HttpClient) { }
 
 
-    getAllMediaByPageable(page: number, size: number): Observable<any> {
-        return this.httpClient.get<any>(environment.apiUrl + 'media' + '?page=' + String(page) + '&size=' + size);
-    }
+    getAllByPageable(page: number, pageSize: number, path?: string, status?: string): Observable<MediaPath> {
+      if (environment.testing) {
+          return this.httpClient.get<MediaPath>('assets/lavanda/data/dummy-media-short.json');
 
-    getTranscodes(flatMediaId: string): Observable<TranscodeMedia[]> {
-        return this.httpClient.get<TranscodeMedia[]>(environment.apiUrl + 'media/' + flatMediaId + '/transcodes');
-    }
+      }
+      else {
+          let params = new HttpParams();
+          // ?page = ' + page + ' & size=' + pageSize + ' & path=' + path + ' & status=' + status
+          params = params.set('pageSize', pageSize);
+          params = params.set('page', page);
 
-    getTranscodesByType(type: string): Observable<TranscodeApi> {
-        return this.httpClient.get<TranscodeApi>(environment.apiUrl + 'transcodes/' + type);
-    }
+          if (path) {
+              params = params.set('path', path);
+          }
+          if (status) {
+              params = params.set('status', status);
+          }
+          return this.httpClient.get<MediaPath>(environment.apiUrl + 'media', { params });
+      }
+  }
 
-    createTranscodes(flatMediId: string, transcodes: Transcode[]): Observable<any> {
-        return this.httpClient.post(environment.apiUrl + 'transcodes/' + flatMediId, transcodes);
-    }
+    // getAllMediaByPageable(page: number, size: number): Observable<any> {
+    //     return this.httpClient.get<any>(environment.apiUrl + 'media' + '?page=' + String(page) + '&size=' + size);
+    // }
 
-    downloadById(id: string) {
-        const url = 'https://files.lavandadelpatio.es/' + 'files' + '/' + id;
-        //window.open(url);
-    }
+    // getTranscodes(flatMediaId: string): Observable<TranscodeMedia[]> {
+    //     return this.httpClient.get<TranscodeMedia[]>(environment.apiUrl + 'media/' + flatMediaId + '/transcodes');
+    // }
 
-    watchById(id: string): string {
-        return 'https://files.lavandadelpatio.es/' + 'files/player/' + id;
-    }
+    // getTranscodesByType(type: string): Observable<TranscodeApi> {
+    //     return this.httpClient.get<TranscodeApi>(environment.apiUrl + 'transcodes/' + type);
+    // }
 
-    deleteFlat(id: string): Observable<any> {
-        const url = environment.apiUrl + 'media/' + id;
-        return this.httpClient.delete(url);
-    }
-    deleteTranscode(id: string): Observable<any> {
-        const url = environment.apiUrl + 'media/transcodes/' + id;
-        return this.httpClient.delete(url);
-    }
+    // createTranscodes(flatMediId: string, transcodes: Transcode[]): Observable<any> {
+    //     return this.httpClient.post(environment.apiUrl + 'transcodes/' + flatMediId, transcodes);
+    // }
+
+    // downloadById(id: string) {
+    //     const url = 'https://files.lavandadelpatio.es/' + 'files' + '/' + id;
+    //     //window.open(url);
+    // }
+
+    // watchById(id: string): string {
+    //     return 'https://files.lavandadelpatio.es/' + 'files/player/' + id;
+    // }
+
+    // deleteFlat(id: string): Observable<any> {
+    //     const url = environment.apiUrl + 'media/' + id;
+    //     return this.httpClient.delete(url);
+    // }
+    // deleteTranscode(id: string): Observable<any> {
+    //     const url = environment.apiUrl + 'media/transcodes/' + id;
+    //     return this.httpClient.delete(url);
+    // }
 }
