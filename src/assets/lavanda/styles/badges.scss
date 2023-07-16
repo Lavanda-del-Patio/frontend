@@ -65,27 +65,28 @@
       color: #256029;
   }
 
-  &.status-files_not_found {
+  &.status-files_not_found , &.status-error {
       background: #FFCDD2;
       color: #C63737;
   }
+
 
   &.status-files_existed_in_destination {
       background: #FEEDAF;
       color: #8A5340;
   }
 
-  &.status-new {
-      background: #B3E5FC;
+  &.status-on_telegram, &.status-on_filebot_execution {
+    background: #B3E5FC;
       color: #23547B;
   }
 
-  &.status-renewal {
+  &.status-unprocessed, &.status-pending {
       background: #ECCFFF;
       color: #694382;
   }
 
-  &.status-proposal {
+  &.status-on_telegram, &.status-on_filebot_execution {
       background: #FFD8B2;
       color: #805B36;
   }
