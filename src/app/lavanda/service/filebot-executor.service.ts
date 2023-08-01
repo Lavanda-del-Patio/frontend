@@ -54,10 +54,14 @@ export class FilebotExecutorService {
     return this.httpClient.post<Qbittorrent>(environment.apiUrl + 'filebot-executor', qbittorrent);
   }
 
-  manualExecution(): Observable<Qbittorrent> {
+  reExecutionAll(): Observable<Qbittorrent> {
     return this.httpClient.post<Qbittorrent>(environment.apiUrl + 'filebot-executor/execute', null);
   }
 
+
+  reExecution(id: string): Observable<Qbittorrent> {
+    return this.httpClient.post<Qbittorrent>(environment.apiUrl + 'filebot-executor/execute/' + id, null);
+  }
 
   downloadLog(data: string) {
     const blob = new Blob([data], { type: 'text/plain' });
