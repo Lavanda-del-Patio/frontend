@@ -1,12 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { Subscription, take } from 'rxjs';
+import { Subscription, debounceTime, take } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { FilebotExecutor, FilebotExecutorAction, FilebotExecutorCategory } from '../../api/filebot-executor.model';
+import { FilebotExecutor, FilebotExecutorAction, FilebotExecutorCategory, FilebotExecutorStatus } from '../../api/filebot-executor.model';
 import { FilebotExecutorService } from '../../service/filebot-executor.service';
 import { Qbittorrent } from '../../api/qbittorrent.model';
+import { FormControl, FormGroup, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 interface expandedRows {
   [key: string]: boolean;
@@ -15,72 +16,81 @@ interface expandedRows {
   templateUrl: './admin-executor.component.html',
   providers: [MessageService]
 })
-export class AdminExecutorComponent implements OnInit {
+export class AdminExecutorComponent implements OnInit, AfterViewInit {
 
   executorDialog: boolean = false;
-
   executors: FilebotExecutor[] = [];
-
   deleteExecutorDialog: boolean = false;
-
   deleteExecutorsDialog: boolean = false;
-
   selectedExecutors: FilebotExecutor[] = [];
-
   submitted: boolean = false;
   executor: FilebotExecutor = {};
-
   cols: any[] = [];
-  page = 0;
-
+  pageNumber = 0;
   pageSize: number = 20;
+  totalElements: number = 0;
   executorStatus: any[] = [];
   expandedRows: expandedRows = {};
-
-  totalElements: number = 0;
-
   rowsPerPageOptions = [10, 20, 30]
-
   redoEnabled: boolean = false;
   isCreatingNew: boolean = false;
   executorActions = Object.values(FilebotExecutorAction);
   executorCategorys = Object.values(FilebotExecutorCategory);
   allFiles: string[] = [];
-
+  debounceTime = 500;
+  searchInput: string = null!;
+  statusSelected: string = null!;
+  form!: FormGroup;
+  status: String[] = [];
 
   constructor(private messageService: MessageService,
     private readonly executorService: FilebotExecutorService) {
+    this.status = Object.keys(FilebotExecutorStatus).filter((v) => isNaN(Number(v)));
+    this.status.unshift(undefined!);
   }
 
   ngOnInit() {
-    this.fillExecutors(this.page, this.pageSize);
+    this.fillExecutors(this.pageNumber, this.pageSize);
+    this.getAllFiles();
+    this.initializeForm();
+  }
+
+  initializeForm() {
+    this.form = new UntypedFormGroup({
+      status: new UntypedFormControl(''),
+      search: new UntypedFormControl(''),
+    });
+    this.form = new FormGroup({
+      search: new FormControl<string | null>(null),
+      status: new FormControl<string | null>(null)
+    });
+  }
+
+  getAllFiles() {
     this.executorService.getAllFilebotExecutor().pipe(take(1)).subscribe(
       (files) => {
         this.allFiles = files;
       }
     );
-    this.executorService.getAllByPageable(0, 20).subscribe(data => {
-      this.executors = data.content;
-      data.content.forEach((element: { path: string; }) => {
-        element.path = element.path.substring(element.path.lastIndexOf('/') + 1);
-        // console.log(element.path);
-      });
-    }
-    );
+  }
+  ngAfterViewInit() {
+    this.form.valueChanges.pipe(
+      debounceTime(this.debounceTime),
+    ).subscribe(changes => this.formChanged(changes));
   }
 
-
   onPageChange(event: any) {
-    this.page = event.page;
+    console.log("Page Change event: ", event);
+    this.pageNumber = event.page;
     this.pageSize = event.rows;
-    this.fillExecutors(event.page, event.rows);
+    this.reload();
   }
 
   normalizeStatus(status: string) { return status.replace(/_/g, ' '); }
 
   fillExecutors(page: number, pageSize: number) {
-    this.executorService.getAllByPageable(page, pageSize).subscribe(data => {
-      console.log("data: ", data);
+    this.executorService.getAllByPageable(page, pageSize, this.searchInput, this.statusSelected).subscribe(data => {
+      // console.log("data: ", data);
       this.executors = data.content;
       data.content.forEach((element: { path: string; }) => {
         element.path = element.path.substring(element.path.lastIndexOf('/') + 1);
@@ -100,18 +110,19 @@ export class AdminExecutorComponent implements OnInit {
   }
 
   reload() {
-    this.fillExecutors(this.page, this.pageSize);
+    console.log("Reload");
+    this.fillExecutors(this.pageNumber, this.pageSize);
   }
 
   executeManually() {
     this.executorService
-      .manualExecution()
+      .reExecutionAll()
       .subscribe(
         (data) => {
-          this.messageService.add({ severity: 'success', detail: 'Manual Execution started', life: 3000 });
+          this.messageService.add({ severity: 'success', detail: 'Full reexecution throwed', life: 3000 });
+          this.reload();
         });
   }
-
 
   deleteSelectedExecutors() {
     this.deleteExecutorsDialog = true;
@@ -128,6 +139,19 @@ export class AdminExecutorComponent implements OnInit {
 
 
     this.executor = { ...executor };
+  }
+
+  downloadLog(executor: FilebotExecutor) {
+    this.executorService
+      .downloadLog(executor.log!);
+  }
+
+  reExecution(executor: FilebotExecutor) {
+    this.executorService.reExecution(executor.id!).subscribe(
+      (data) => {
+        this.messageService.add({ severity: 'success', detail: 'Reset execution throwed', life: 3000 });
+        this.reload();
+      });
   }
 
   confirmDeleteSelected() {
@@ -152,14 +176,6 @@ export class AdminExecutorComponent implements OnInit {
   }
 
   saveExecutor() {
-
-    // const filebotExecutor = {
-    //     path: this.qbittorrentFormGroup.get('file')?.value,
-    //     category: this.qbittorrentFormGroup.get('category')?.value,
-    //     command: this.qbittorrentFormGroup.get('command')?.value,
-    //     status: this.data.status,
-    //     action: this.qbittorrentFormGroup.get('action')?.value.toUpperCase(),
-    // }
     if (!this.redoEnabled) {
       this.executor.command = null;
     }
@@ -172,10 +188,12 @@ export class AdminExecutorComponent implements OnInit {
       };
       this.executorService.createQbittorrent(qbittorrent).pipe(take(1)).subscribe((res) => {
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Executor Created', life: 3000 });
+        this.reload();
       });
     } else {
       this.executorService.editFilebotExecutor(this.executor.id!, this.executor).pipe(take(1)).subscribe((res) => {
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Executor Updated', life: 3000 });
+        this.reload();
       }
       );
     }
@@ -187,22 +205,14 @@ export class AdminExecutorComponent implements OnInit {
 
   }
 
-  findIndexById(id: string): number {
-    let index = -1;
-    for (let i = 0; i < this.executors.length; i++) {
-      if (this.executors[i].id === id) {
-        index = i;
-        break;
-      }
-    }
-
-    return index;
-  }
-
   createId(): string {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   }
-  onGlobalFilter(table: Table, event: Event) {
-    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+
+  formChanged(currentValue: any) {
+    const fields = ['search', 'status'];
+    this.statusSelected = this.form!.get('status')!.value;
+    this.searchInput = this.form!.get('search')!.value;
+    this.reload();
   }
 }
