@@ -124,10 +124,6 @@ export class AdminExecutorComponent implements OnInit, AfterViewInit {
         });
   }
 
-  deleteSelectedExecutors() {
-    this.deleteExecutorsDialog = true;
-  }
-
   editExecutor(executor: FilebotExecutor) {
     this.executor = { ...executor };
     this.executorDialog = true;
@@ -136,9 +132,11 @@ export class AdminExecutorComponent implements OnInit, AfterViewInit {
 
   deleteExecutor(executor: FilebotExecutor) {
     this.deleteExecutorDialog = true;
-
-
     this.executor = { ...executor };
+  }
+
+  deleteSelectedExecutors() {
+    this.deleteExecutorsDialog = true;
   }
 
   downloadLog(executor: FilebotExecutor) {
@@ -157,6 +155,13 @@ export class AdminExecutorComponent implements OnInit, AfterViewInit {
   confirmDeleteSelected() {
     this.deleteExecutorsDialog = false;
     this.executors = this.executors.filter(val => !this.selectedExecutors.includes(val));
+    this.selectedExecutors.forEach((executor) => {
+      this.executorService.delete(executor.id!).subscribe(
+        (data) => {
+          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Executor Deleted', life: 1000 });
+          this.reload();
+        });
+    });
     this.selectedExecutors = [];
   }
 
@@ -174,6 +179,7 @@ export class AdminExecutorComponent implements OnInit, AfterViewInit {
     this.executorDialog = false;
     this.submitted = false;
   }
+
 
   saveExecutor() {
     if (!this.redoEnabled) {
