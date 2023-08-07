@@ -5,12 +5,14 @@
       <p-toolbar styleClass="mb-12">
         <ng-template pTemplate="center">
           <div class="flex flex-wrap gap-2">
-            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-primary mr-2"
-              (click)="createNew()"></button>
-            <button pButton pRipple label="Reload" icon="pi pi-refresh" class="p-button-success mr-2"
-              (click)="reload()"></button>
-            <button pButton pRipple label="Manual Execution" icon="pi pi-play" class="p-button-danger mr-2"
-              (click)="executeManually()"></button>
+            <button [disabled]="selectedExecutors.length>0" pButton pRipple label="New" icon="pi pi-plus"
+              class="p-button-primary mr-2" (click)="createNew()"></button>
+            <button [disabled]="selectedExecutors.length>0" pButton pRipple label="Reload" icon="pi pi-refresh"
+              class="p-button-success mr-2" (click)="reload()"></button>
+            <button [disabled]="selectedExecutors.length>0" pButton pRipple label="Manual Execution" icon="pi pi-play"
+              class="p-button-danger mr-2" (click)="executeManually()"></button>
+            <button *ngIf="selectedExecutors.length>0" pButton pRipple label="Delete Selected" icon="pi pi-play"
+              class="p-button-danger mr-2" (click)="deleteSelectedExecutors()"></button>
             <!-- <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedExecutors()" [disabled]="!selectedExecutors || !selectedExecutors.length"></button> -->
           </div>
         </ng-template>
