@@ -30,7 +30,7 @@ export enum FilebotExecutorAction {
 }
 
 export enum FilebotExecutorCategory {
-    TV_SONARR = "tv-sonarr",
-    TV_SONARR_EN = "tv-sonarr-en",
-    RADARR = "radarr"
+    TV = "TV",
+    TV_EN = "TV_EN",
+    FILM = "FILM"
 }
