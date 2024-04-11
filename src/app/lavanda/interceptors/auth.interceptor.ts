@@ -17,8 +17,8 @@ export class AuthInterceptor implements HttpInterceptor {
       //});
       // console.log("With Crendentials request")
       // console.log(request)
-      return next.handle(request);
-    }
+      //return next.handle(request);
+    //}
     return next.handle(request);
   }
 }
